@@ -1,10 +1,6 @@
 # Industrial Visual Analysis
 
-In this developer journey, we will classify industrial equipment through watson visual recognition by analyzing the image against a trained classifier. Here we will be training the visual recognition to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak.
-
-The images data is stored in a Cloundant database.  This journey demonstrates Cloud Functions to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data.
-
-This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
+In this developer journey, we will classify industrial equipment through watson visual recognition by analyzing the image against a trained classifier. Here we will be training the visual recognition to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. The images data is stored in a Cloundant database.  This journey demonstrates Cloud Functions to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data. This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
 
 When the reader has completed this journey, they will understand how to:
 
@@ -12,7 +8,6 @@ When the reader has completed this journey, they will understand how to:
 * Configure Cloudant database to store and retrieve image data
 * Set up IBM Cloud Functions to trigger Visual Recognition analysis and store result in Cloudant database
 * Launch a web app to view a dashboard of the Visual Recognition analysis, and deploy to Bluemix
-
 
 # Architecture Flow
 
@@ -29,7 +24,6 @@ When the reader has completed this journey, they will understand how to:
 
 ## Featured technologies
 
-
 - [node js](https://www.python.org/downloads/)
 - [curl](https://curl.haxx.se/download.html)
 
@@ -41,7 +35,6 @@ Follow these steps to setup and run this developer journey. The steps are descri
 2. [Cloudant NoSQL DB Setup](#2-Cloudant-NoSQL-DB-Setup)
 3. [IBM Cloud Functions Setup](#3-IBM-Cloud-Functions-Setup)
 4. [Run Web Application](#4-Run-Web-Application)
-
 
 
 ## 1. Watson Visual Recognition Setup
@@ -206,7 +199,7 @@ Click on each image to pull up a detailed page providing information on one sing
 
 If you go to the URL.mybluemix.net/simulator page you will be able to access a simulator to help you send images to the Cloudant database in case you do not have a way of using a drone to send data to the cloud. This simulator page can be your "drone". (data that is sent from the simulator is hardcoded within the program and can be changed by the developer after replicating it)
 
-# Extending the journey with Drone!
+# Extending the journey with Drone
 
 
 ## Privacy Notice
