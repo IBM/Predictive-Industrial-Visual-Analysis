@@ -1,0 +1,37 @@
+{
+	"name": "NodejsStarterApp",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"express": "4.13.x",
+		"ejs": "2.4.x",
+		"body-parser": "1.14.x",
+		"method-override": "2.3.x",
+		"morgan": "1.6.x",
+		"errorhandler": "1.4.x",
+		"vcap_services": "^0.2.0",
+		"dotenv": "^4.0.0",
+		"connect-multiparty": "2.0.x",
+		"cfenv": "1.0.x",
+		"archiver": "^1.0.1",
+        "async": "^2.0.1",
+        "cf-deployment-tracker-client": "0.0.8",
+        "cloudant": "^1.4.1",
+        "connect-busboy": "*",
+        "gm": "^1.23.0",
+        "jade": "^1.11.0",
+        "jade-bootstrap": "1.0.14",
+        "jsonfile": "^2.2.3",
+        "passport": "*",
+        "request": "^2.65.0",
+        "watson-developer-cloud": "^1.2.4",
+        "pug": "2.0.0-beta11"
+	},
+	"repository": {},
+	"engines": {
+		"node": "4.x"
+	}
+}

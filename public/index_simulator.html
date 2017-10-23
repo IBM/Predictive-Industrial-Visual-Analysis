@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Phantom Drone Simulator</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/style_simulator.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+	<link rel="stylesheet" href="/public/css/index.css" />
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="heading">
+		<h1 class="minimalpad">
+			<a href="/">Phantom Drone Demo</a>
+		</h1>
+		<p>Your cognitive eye in the sky...</p>
+		<div class="minimalpad upload">
+			<a class="button" href="/simulator">Upload New Image</a>
+		</div>
+	</div>
+
+	<div class = "container">
+	<div class = "banner">
+		<p class = "appTitle">
+			Phantom Drone Demo - Simulator for Sending Images from a "Drone"
+		</p>
+	</div>
+    <td align="center">
+    	<p>
+    	Send an image to your Cloudant NoSQL database by clicking the ADD button below and selecting an image from your computer.
+    	</p>
+    </td>
+    <td align="center">
+		<!-- <button class='detailBtn' onclick="toggleServiceInfo()" title='Service information'>
+			<img src='images/detail.png' alt='detail'/>
+		-->
+		<button class="addBtn" onclick="addItem()" title="add record">
+			<img src="images/add.png" alt="add">
+		</button>
+		<br>
+		<a class = "infoImg" onclick="toggleAppInfo()">Help</a>
+	</td>
+	<div id='appinfo' class = 'appinfo' style='display: none;'>
+					This simulator application helps you insert images into Cloudant</br>
+				    Click on <span class = 'deleteBtn' alt='delete'></span> icon to delete the image.
+	</div>
+	<div id="loadingImage"></div>
+	<br><br><br><br><br>
+	<div id="errorDiv" class='errorMsg'></div>
+
+	<section class="center">
+		<table id='notes' class='records' border='0' cellspacing='0' cellpadding='0'><tbody></tbody></table>
+	</section>
+	<footer>
+
+	</footer>
+	<script type="text/javascript" src="scripts/util.js"></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+	<div id="myImage"><div id="innerImg"></div></div>
+	<br><br><br>
+	</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+include ./header.pug
+
+//show summary of Agriculture Image Data
+//div(class="container-fluid-test" )
+//    div(class="listCell")
+//        p 
+//        b Total Number of Images
+//        p 
+//       a(href="#")= body.total_rows
+//    div(class="listCell")
+//        p 
+//        b Positive Images from Zone1
+//        p 
+//        a(href="#")= zone1_count
+//    div(class="listCell")
+//        p 
+//        b Positive Images from Zone2
+//        p 
+//        a(href="#")= zone2_count
+//    div(class="listCell")
+//        p 
+//        b Positive Images from Zone3
+//        p 
+//        a(href="#")= zone3_count
+
+//div(class="container-fluid-test1" )
+//    div(class="listCell")
+//        p 
+//        b Zone1 images needing attention
+//        p 
+//        a(href="#")= zone1_negative_count
+//    div(class="listCell")
+//        p 
+//        b Zone2 images needing attention
+//        p 
+//        a(href="#")= zone2_negative_count
+//    div(class="listCell")
+//        p 
+//        b Zone3 images needing attention
+//        p 
+//        a(href="#")= zone3_negative_count
+//    div(class="listCell")
+//        p 
+//        b Images that are unrecognized
+//        p 
+ //       a(href="#")= unknown_image_count
+//end summary of Agriculture Image Data
+
+div(class="container-fluid")
+    each row in body.rows
+        div(class="listCell")
+            a(href="./" + row.id)
+                div(class="callout" style="padding:2px;")
+                    p= row.key.timestamp
+                    img(src="/public/assets/placeholder.jpg" class="lazy" data-original="./" + row.id + "/attachments/thumbnail.jpg" style="max-width:100%; width:100%; min-height:210px;")
+                    if row.key.analysis == undefined
+                        p Analyzed: NO
+                    else
+                        p Analyzed: YES
+                            if row.key.analysis.size != undefined
+                                span= ", " + row.key.analysis.size.width + " x " + row.key.analysis.size.height
+
+include ./footer.pug
+
+<script src='/public/scripts/jquery.lazyload.js'></script>
+script.
+    $(document).ready(function() {
+        $("img.lazy").lazyload();
+    });
+               
+                        

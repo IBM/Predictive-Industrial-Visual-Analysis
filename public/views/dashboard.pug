@@ -1,0 +1,134 @@
+//- extends ../_bootstrap
+//- append styles
+include ./headerdashboard.pug
+style
+	include ../css/dashboard.css
+
+//- link(href='../css/dashboard.css', rel='stylesheet', type='text/css')
+
+//- block body
+div
+	nav
+//-	.navbar
+//-	.navbar-inverse.navbar-fixed-top
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(href='#') Project name
+			#navbar.navbar-collapse.collapse
+				ul.nav.navbar-nav.navbar-right
+					li
+						a(href='#') Dashboard
+//-					li
+//-						a(href='#') Settings
+//-					li
+//-						a(href='#') Profile
+//-					li
+//-						a(href='#') Help
+				form.navbar-form.navbar-right
+					input.form-control(type='text', placeholder='Search...')
+
+//-			.col-sm-3.col-md-2.sidebar
+//-				ul.nav.nav-sidebar
+//-					li.active
+//-						a(href='#')
+//-							| Overview
+//-							span.sr-only (current)
+//-					li
+//-						a(href='#') Reports
+//-					li
+//-						a(href='#') Analytics
+//-					li
+//-						a(href='#') Export
+//-				ul.nav.nav-sidebar
+//-					li
+//-						a(href='') Nav item
+//-					li
+//-						a(href='') Nav item again
+//-					li
+//-						a(href='') One more nav
+//-					li
+//-						a(href='') Another nav item
+//-					li
+//-						a(href='') More navigation
+//-				ul.nav.nav-sidebar
+//-					li
+//-						a(href='') Nav item again
+//-					li
+//-						a(href='') One more nav
+//-					li
+//-						a(href='') Another nav item
+div
+	nav
+		.container-fluid
+			.row.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-1.main
+				h1.page-header Dashboard
+				.row.placeholders
+					.col-xs-6.col-sm-3.placeholder
+						img.img-responsive(src='./public/images/dashboard_red.png', alt='Red thumbnail')
+						h4
+							a(style={color: 'white'} href="./needimmediateattention")= red_count
+						br
+						span.text-muted Need immediate attention
+					.col-xs-6.col-sm-3.placeholder
+						img.img-responsive(src='./public/images/dashboard_yellow.jpg', alt='Yellow thumbnail')
+						h4
+							a(style={color: 'white'} href="./mayneedattention")= yellow_count
+						br
+						span.text-muted May need attention
+					.col-xs-6.col-sm-3.placeholder
+						img.img-responsive(src='./public/images/dashboard_green.jpg', alt='Green thumbnail')
+						h4
+							a(style={color: 'white'} href="./doesnotneedattention")= green_count
+						br
+						span.text-muted Do not need attention
+					.col-xs-6.col-sm-3.placeholder
+						img.img-responsive(src='./public/images/dashboard_blue.jpg', alt='Blue thumbnail')
+						h4
+							a(style={color: 'white'} href="./allimages")= total_count
+						br
+						span.text-muted Total Images
+				h2.sub-header Latest Images
+				.table-responsive
+					table.table.table-striped
+						thead
+							tr
+								th ID
+								th Aircraft
+								th Timestamp
+								th Region
+								th Analyzed?
+						tbody
+							each row in body.rows
+								if row.key.analysis == undefined
+									tr
+										td
+											a(href="./" + row.id)= row.id
+										td= row.key.aircraft
+										td= row.key.timestamp
+										td= row.key.region
+										td NO
+								else
+									tr
+										td
+											a(href="./" + row.id)= row.id
+										td= row.key.aircraft
+										td= row.key.timestamp
+										td= row.key.region
+										td YES
+
+//- div
+	//- p= bodystring
+	//- each row in body.rows
+//-		-var rowID = row.id;
+//-		tr
+//-			td
+//-				a(href="./" + row.id)= row.id
+//-			td
+//-				a(href="./" + row.id) mylink
+//-			td= row.id
+//-			td done

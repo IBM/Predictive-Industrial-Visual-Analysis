@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 1024M
+  instances: 1
+  domain: mybluemix.net
+  name: rz-industrial-visual-analysis2
+  host: rz-industrial-visual-analysis2
+  disk_quota: 1024M
+  services:
+  - rz-vr-cloudant
+  - rz-visual-recognition
