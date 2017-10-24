@@ -1,6 +1,6 @@
 # Industrial Visual Analysis
 
-In this developer journey, we will classify industrial equipment through watson visual recognition by analyzing the image against a trained classifier. Here we will be training the visual recognition to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. The images data is stored in a Cloundant database.  This journey demonstrates Cloud Functions to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data. This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
+In this developer journey, we will classify industrial equipment and proactively identify damaged equipment. Using watson visual recognition, we will analyze the image against a trained classifier. Here we will be training the visual recognition to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. The images data is stored in a Cloundant database.  This journey demonstrates Cloud Functions to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data. This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
 
 When the reader has completed this journey, they will understand how to:
 
@@ -43,7 +43,7 @@ Create the [Watson Visual Recognition](https://www.ibm.com/watson/services/visua
 
 Open a command line interface (CLI) on your desktop and clone this repo:
 ```
-git clone https://github.com/IBM/
+git clone https://github.com/IBM/Industrial-Visual-Analysis
 ```
 
 Go to the folder where the images are placed
@@ -134,7 +134,7 @@ FUNCTIONS_AUTHORIZATION=
 We will now run the ``setup_functions.sh`` file to set up the microservice which triggers the Visual Recognition analysis as an image is added to the Cloudant database.
 
 ```
-chmod +x skylink.sh
+chmod +x setup_functions.sh
 ./setup_functions.sh --install
 ```
 The above command will setup the OpenWhisk actions for you, there should be no need to do anything else if you see an Install Complete message with green OK signs in the CLI.
