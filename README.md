@@ -59,7 +59,7 @@ git clone https://github.com/IBM/Industrial-Visual-Analysis
 
 Go to the folder where the images are placed
 ```
-cd Industrial-Visual-Analysis/VR-Image-Data
+cd Industrial-Visual-Analysis/vr-image-data
 ```
 
 Here we will create a classifier using the zipped images to train the Watson Visual-Recognition service. The images in each zipped folder are used to make the Watson VR service become familiar with the images that relate to the different categories (Corrosion, Leak, etc.). Run the following command to submit all 6 sets of images to the Watson service classifier:
@@ -217,7 +217,7 @@ You have the ability to see all the images in one single page.
 
 Click on each image to pull up a detailed page providing information on one single event (image). You will be able to see information on what the Watson Visual Recognition service saw in the image and the confidence levels.
 
-You can click the ``Upload New Image`` button to send images to the Cloudant database.  
+You can click the ``Upload New Image`` button to send images to the Cloudant database.  There are sample images in the ``sample-images`` folder to try out.
 
 ## Extending the journey with Drone
 
