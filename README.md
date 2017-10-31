@@ -19,7 +19,7 @@ When the reader has completed this journey, they will understand how to:
   <img width="600"  src="readme_images\arch_flow.png">
 </p>
 
-1. User uploads the pipeline image through the web UI
+1. User uploads the image through the web UI
 2. The image data is send to the Cloudant database
 3. As the image is inserted into the database, the Cloud Functions triggers mircoservice
 4. The microservice analyzes the image using the trained Watson Visual Recognition service

@@ -1,3 +1,10 @@
+declared-services:
+  visual-recognition:
+    label: watson_vision_combined
+    plan: free
+  cloudant-images:
+    label: cloudantNoSQLDB
+    plan: Lite
 applications:
 - path: .
   memory: 1024M
@@ -7,5 +14,5 @@ applications:
   host: industrial-visual-analysis
   disk_quota: 1024M
   services:
-  - rz-vr-cloudant
-  - rz-visual-recognition
+  - visual-recognition
+  - cloudant-images
