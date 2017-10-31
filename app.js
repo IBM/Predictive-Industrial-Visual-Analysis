@@ -47,9 +47,9 @@ console.log (cloudant_url);
 // Initialize Cloudant DB
 var cloudant = Cloudant(cloudant_url);
 var db;
-var dbName = "overwatch";
+var dbName = "image_db";
 var dbCredentials = {
-    dbName: 'overwatch'
+    dbName: 'image_db'
 };
 
 cloudant.db.create(dbName, function() {
@@ -97,36 +97,6 @@ function getDBCredentialsUrl(jsonData) {
     }
 }
 
-
-//function initDBConnection() {
-//    //When running on Bluemix, this variable will be set to a json object
-//    //containing all the service credentials of all the bound services
-//    if (process.env.VCAP_SERVICES) {
-//        dbCredentials.url = getDBCredentialsUrl(process.env.VCAP_SERVICES);
-//    } else { //When running locally, the VCAP_SERVICES will not be set
-//
-//        // When running this app locally you can get your Cloudant credentials
-//        // from Bluemix (VCAP_SERVICES in "cf env" output or the Environment
-//        // Variables section for an app in the Bluemix console dashboard).
-//        // Once you have the credentials, paste them into a file called vcap-local.json.
-//        // Alternately you could point to a local database here instead of a
-//        // Bluemix service.
-//        // url will be in this format: https://username:password@xxxxxxxxx-bluemix.cloudant.com
-//        dbCredentials.url = getDBCredentialsUrl(fs.readFileSync("vcap-local.json", "utf-8"));
-//    }
-//
-//    cloudant = require('cloudant')(dbCredentials.url);
-//
-//    // check if DB exists if not create
-//    cloudant.db.create(dbCredentials.dbName, function(err, res) {
-//        if (err) {
-//            console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
-//        }
-//    });
-//
-//    db = cloudant.use(dbCredentials.dbName);
-//}
-
 app.get('/simulator', function(req, res){
     //res.sendfile('index_simulator.html', { root: __dirname} );
     res.sendFile(path.join(__dirname + '/public/index_simulator.html'));
@@ -136,7 +106,7 @@ app.get('/testingpurposes', function (req, res) {
     //for now just returning all images.
     //in the real world you would want to filter this list or truncate/page it
 
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -145,63 +115,6 @@ app.get('/testingpurposes', function (req, res) {
         console.log("Body is: " + JSON.stringify(body));
         //this should really be sorted on the database
         body.rows = body.rows.sort(sortList);
-
-        //code for filtering Agriculture Zones demo
-        //STARTS HERE
-//
-//        var zone1_count = 0;
-//        var zone2_count = 0;
-//        var zone3_count = 0;
-//        var zone1_negative_count = 0;
-//        var zone2_negative_count = 0;
-//        var zone3_negative_count = 0;
-//        var unknown_image_count = 0;
-//
-
-        //Count images that are high confidence for Zone1
-//        for (var i = 0; i < body.rows.length; i++) {
-//    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score >= 0.70) {
-//    			zone1_count++;
-//    		} else if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.70 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.20 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.20
-//    					) {
-//    			zone1_negative_count++;
-//    		}
-//		}
-
-		//Count images that are high confidence for Zone2
-//        for (var i = 0; i < body.rows.length; i++) {
-//    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score >= 0.70){
-//    			zone2_count++;
-//    		} else if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.70 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.20 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.20
-//    					){
-//    			zone2_negative_count++;
-//    		}
-//    	}
-
-    	//Count images that are high confidence for Zone3
-//        for (var i = 0; i < body.rows.length; i++) {
-//    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score >= 0.70){
-//    			zone3_count++;
-//    		} else if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.70 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.20 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.20
-//    					) {
-//    			zone3_negative_count++;
-//    		}
-//    	}
-
-//
-//		console.log("Zone1: " + zone1_count);
-//		console.log("Zone2: " + zone2_count);
-//		console.log("Zone3: " + zone3_count);
-
-        //res.render("list", { body:body, zone1_count:zone1_count, zone1_negative_count:zone1_negative_count, zone2_count:zone2_count, zone2_negative_count:zone2_negative_count, zone3_count:zone3_count, zone3_negative_count:zone3_negative_count, unknown_image_count:unknown_image_count});
-
-        //ENDS HERE for Ag Demo
         res.render("list", {body:body});
 
     });
@@ -211,7 +124,7 @@ app.get('/allimages', function (req, res) {
     //for now just returning all images.
     //in the real world you would want to filter this list or truncate/page it
 
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -220,63 +133,6 @@ app.get('/allimages', function (req, res) {
         console.log("Body is: " + JSON.stringify(body));
         //this should really be sorted on the database
         body.rows = body.rows.sort(sortList);
-
-        //code for filtering Agriculture Zones demo
-        //STARTS HERE
-//
-//        var zone1_count = 0;
-//        var zone2_count = 0;
-//        var zone3_count = 0;
-//        var zone1_negative_count = 0;
-//        var zone2_negative_count = 0;
-//        var zone3_negative_count = 0;
-//        var unknown_image_count = 0;
-//
-
-        //Count images that are high confidence for Zone1
-//        for (var i = 0; i < body.rows.length; i++) {
-//    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score >= 0.70) {
-//    			zone1_count++;
-//    		} else if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.70 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.20 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.20
-//    					) {
-//    			zone1_negative_count++;
-//    		}
-//		}
-
-		//Count images that are high confidence for Zone2
-//        for (var i = 0; i < body.rows.length; i++) {
-//    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score >= 0.70){
-//    			zone2_count++;
-//    		} else if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.70 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.20 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.20
-//    					){
-//    			zone2_negative_count++;
-//    		}
-//    	}
-
-    	//Count images that are high confidence for Zone3
-//        for (var i = 0; i < body.rows.length; i++) {
-//    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score >= 0.70){
-//    			zone3_count++;
-//    		} else if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.70 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.20 &&
-//    					body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.20
-//    					) {
-//    			zone3_negative_count++;
-//    		}
-//    	}
-
-//
-//		console.log("Zone1: " + zone1_count);
-//		console.log("Zone2: " + zone2_count);
-//		console.log("Zone3: " + zone3_count);
-
-        //res.render("list", { body:body, zone1_count:zone1_count, zone1_negative_count:zone1_negative_count, zone2_count:zone2_count, zone2_negative_count:zone2_negative_count, zone3_count:zone3_count, zone3_negative_count:zone3_negative_count, unknown_image_count:unknown_image_count});
-
-        //ENDS HERE for Ag Demo
         res.render("list", {body:body});
 
     });
@@ -286,7 +142,7 @@ app.get('/needimmediateattention', function (req, res) {
     //for now just returning all images.
     //in the real world you would want to filter this list or truncate/page it
 
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -319,7 +175,7 @@ app.get('/mayneedattention', function (req, res) {
     //for now just returning all images.
     //in the real world you would want to filter this list or truncate/page it
 
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -357,7 +213,7 @@ app.get('/doesnotneedattention', function (req, res) {
     //for now just returning all images.
     //in the real world you would want to filter this list or truncate/page it
 
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -389,7 +245,7 @@ app.get('/doesnotneedattention', function (req, res) {
 
 
 app.get('/dashboardtesting', function (req, res) {
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -408,19 +264,7 @@ app.get('/', function (req, res) {
     //for now just returning all image counts.
     //in the real world you would want to filter this list or truncate/page it
 
-//    db.changes({
-//  		since: 'now',
-//  		live: true,
-//  		include_docs: true
-//	}).on('change', function(changes) {
-//		console.log("Change detected, sending blank now!!!");
-//		console.log(JSON.stringify(changes));
-//  		res.render("dashboard", {body: {}, bodystring: "changes"});
-//	}).on('error', function (err) {
-//  		console.log("Error during changes: " + err);
-//	});
-
-    db.view( 'overwatch_images',  'overwatch.images', function(err, body) {
+    db.view( 'image_db_images',  'image_db.images', function(err, body) {
         if (err) {
             console.log("Error during db view stage: " + err.toString());
             res.status(404).send(err.toString());
@@ -433,46 +277,51 @@ app.get('/', function (req, res) {
         var red_count = 0;
         var yellow_count = 0;
         var green_count = 0;
-		var total_count = body.rows.length;
+		    var total_count = body.rows.length;
+
+
 
         for (var i = 0; i < body.rows.length; i++) {
-    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score < 0.40
-    			//class[3] is Normal Condition, not needed here
-    		) {
-    			green_count++;
-    		}
-		}
 
-		//Count images that may need attention
-        for (var i = 0; i < body.rows.length; i++) {
-    		if((body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score > 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.60) ||
-    			(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score > 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.60) ||
-    			(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score > 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.60) ||
-    			(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score > 0.40 &&
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score < 0.60)
-    			//class[3] is Normal Condition, not needed here
-    		) {
-    			yellow_count++;
-    		}
-		}
+          if ('analysis' in body.rows[i].key) {
+        		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score < 0.40 ) {
+      			     green_count++;
+      		  }
+          }
+		    }
 
-		//Count images that do need attention
+		    //Count images that may need attention
         for (var i = 0; i < body.rows.length; i++) {
-    		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score > 0.60 ||
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score > 0.60 ||
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score > 0.60 ||
-    			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score > 0.60
-    			//class[3] is Normal Condition, not needed here
-    		) {
-    			red_count++;
+
+          if ('analysis' in body.rows[i].key) {
+        		if((body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score > 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score < 0.60) ||
+        			(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score > 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score < 0.60) ||
+        			(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score > 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score < 0.60) ||
+        			(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score > 0.40 &&
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score < 0.60)) {
+      			       yellow_count++;
+            }
+          }
     		}
-		}
+
+
+		    //Count images that do need attention
+        for (var i = 0; i < body.rows.length; i++) {
+          if ('analysis' in body.rows[i].key) {
+        		if(body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[0].score > 0.60 ||
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[1].score > 0.60 ||
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[2].score > 0.60 ||
+        			body.rows[i].key.analysis.image_classify.images[0].classifiers[0].classes[4].score > 0.60 ) {
+      			       red_count++;
+      		  }
+          }
+		    }
 
         //console.log(JSON.stringify(body.rows));
         res.render("dashboard", {body:body, bodystring: JSON.stringify(body), total_count:total_count, green_count: green_count, yellow_count: yellow_count, red_count: red_count});
@@ -602,18 +451,11 @@ db.get(request.query.id, function(err, existingdoc) {
         var newPath = './public/uploads/' + file.name;
 
         var insertAttachment = function(file, id, rev, name, value, response) {
-			//console.log("FILE ID IS: " + JSON.stringify(file));
-			//console.log("VALUE ID IS: " + value.toString());
-			//console.log("Response ID IS: " + response);
-			//console.log("Name ID IS: " + name);
 
             fs.readFile(file.path, function(err, data) {
                 if (!err) {
 
                     if (file) {
-						//console.log("DOC ID IS: " + id);
-						//console.log("DOC ID IS: " + data);
-						//console.log("DOC ID IS: " + file.type);
 						db.attachment.insert(id, "image.jpg", data, file.type, {
                         //db.attachment.insert(id, file.name, data, file.type, {
                             rev: rev
@@ -688,7 +530,7 @@ db.get(request.query.id, function(err, existingdoc) {
             db.insert({
                 name: name,
                 value: value,
-                type: "overwatch.image",
+                type: "image_db.image",
   				timestamp: now_timestamp,
   				longitude: -95.34,
   				latitude: 47.626773,
@@ -980,8 +822,6 @@ app.post('/:id?/retrain/:posneg?/:classifierId?/:classifierClass?', function (re
         res.status(500).send();
     }
 });
-
-
 
 
 // Start listening

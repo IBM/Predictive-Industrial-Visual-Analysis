@@ -1,6 +1,10 @@
 # Industrial Visual Analysis
 
-In this developer journey, we will classify industrial equipment and proactively identify damaged equipment. Using watson visual recognition, we will analyze the image against a trained classifier. Here we will be training the visual recognition to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. The images data is stored in a Cloundant database.  This journey demonstrates Cloud Functions to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data. This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
+In this developer journey, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the classifier, on how closely the image matches one of the damaged classification or the Normal classification.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
+
+The images data is stored in a Cloundant database which makes it easier to connect remote devices (including drones) to capture images.  The database can be used to store different properties of the images like location and description.  
+
+This journey demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data. This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
 
 When the reader has completed this journey, they will understand how to:
 
@@ -12,8 +16,15 @@ When the reader has completed this journey, they will understand how to:
 # Architecture Flow
 
 <p align="center">
-  <img width="60" height="40" src="images\arch_flow.png">
+  <img width="600"  src="readme_images\arch_flow.png">
 </p>
+
+1. User uploads the pipeline image through the web UI
+2. The image data is send to the Cloudant database
+3. As the image is inserted into the database, the Cloud Functions triggers mircoservice
+4. The microservice analyzes the image using the trained Watson Visual Recognition service
+5. The analyzed data is fed back into the Cloudant database
+6. The dashboard on the web UI displays the Visual Recognition analysis and images requiring attention
 
 
 ## Included Components
@@ -51,17 +62,13 @@ Go to the folder where the images are placed
 cd Industrial-Visual-Analysis/VR-Image-Data
 ```
 
-Run the following command to submit all 6 sets of images to the Watson service classifier:
+Here we will create a classifier using the zipped images to train the Watson Visual-Recognition service. The images in each zipped folder are used to make the Watson VR service become familiar with the images that relate to the different categories (Corrosion, Leak, etc.). Run the following command to submit all 6 sets of images to the Watson service classifier:
 
 ```
 curl -X POST -F "Bursted_Pipe_positive_examples=@Burst_Images.zip" -F "Corroded_Pipe_positive_examples=@Corrosion_Images.zip" -F "Damaged_Coating_positive_examples=@Damaged_Coating_Images.zip" -F "Joint_Failure_positive_examples=@Joint_Failure_Images.zip" -F "Pipe_Leak_positive_examples=@Leak_Images.zip" -F "Normal_Condition_positive_examples=@Normal_Condition.zip" -F "name=OilPipeCondition" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key={INSERT-YOUR-API-KEY-HERE}&version=2016-05-20"
 ```
 
-The above command allows the Watson VR service to become familiar with various images that relate to the different categories (Corrosion, Leak, etc.) .
-
-The response from above will provide you with a status on the submission and will give you a CLASSIFIER_ID. Please copy this for future use as well.
-
-After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
+The response from above will provide you with a status on the submission and will give you a CLASSIFIER_ID. Please copy this for future use as well. After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
 
 ```
 curl -X GET "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2016-05-20"
@@ -73,20 +80,30 @@ You can find more information on working with your classifier [here](https://con
 
 Create the [Cloudant NoSQL](https://www.ibm.com/analytics/us/en/technology/cloud-data-services/cloudant/) service in Bluemix
 
-Create a new database in Cloudant called <strong>overwatch</strong>
+Create a new database in Cloudant called <strong>image_db</strong>
 
-Next, create a view on the database with the index name ``overwatch_images``, and use the following map function:
+<p align="center">
+  <img width="600"  src="readme_images\cloudant_db.png">
+</p>
+
+
+Next, create a view on the database with the design name ``image_db.images``, index name ``image_db.images``, and use the following map function:
 ```
 function (doc) {
-if ( doc.type == 'overwatch.image' ) {
+if ( doc.type == 'image_db.image' ) {
   emit(doc);
 }
 }
 ```
 
+<p align="center">
+  <img width="600"  src="readme_images\cloudant_view.png">
+</p>
+
+
 ## 3. IBM Cloud Functions Setup
 
-We will now set up the IBM Cloud Functions using Bluemix CLI.
+We will now set up the IBM Cloud Functions (OpenWhisk) using Bluemix CLI.
 
 #### Setup Bluemix CLI
 
@@ -101,6 +118,8 @@ Log in to Bluemix, and target a Region (i.e api.ng.bluemix.net), Organization (i
 ```
 bx login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
 ```
+
+bx login --sso -a api.ng.bluemix.net -o Raheel.Zubairy -s dev
 
 #### Configure .env file
 
@@ -118,7 +137,7 @@ CLOUDANT_USERNAME=
 CLOUDANT_PASSWORD=
 CLOUDANT_HOST=
 CLOUDANT_URL=
-CLOUDANT_DB=overwatch
+CLOUDANT_DB=image_db
 #From Watson Visual Recognition Service
 VR_KEY=
 VR_URL=
@@ -159,7 +178,6 @@ npm start
 
 Test your application by going to: [http://localhost:3000/](http://localhost:3000/)
 
-
 #### Deploy to Bluemix
 
 You can push the app hosted locally by first editing the ```manifest.yml``` file and then use cloud foundry cli to push it to Bluemix.
@@ -184,25 +202,28 @@ In the command use the following command to push the application to bluemix:
 cf push
 ```
 
-----Deploy to Bluemix button----
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/  )
 
 #### Application
 
+<p align="center">
+  <img width="600"  src="readme_images\dashboard_scrnshot.png">
+</p>
+
+
 The app has the following functions:
-Home Page: Displays a quick dashboard showing the number of images in the Cloudant database and how many of them have Watson VR analysis completed. It will also provide a count of how many images were deemed as "Needing attention" based on the response the Watson service provided when classifying the images.
+The homepage displays a quick dashboard showing the number of images in the Cloudant database and how many of them have Watson VR analysis completed. It will also provide a count of how many images were deemed as "Needing attention" based on the response the Watson service provided when classifying the images.
 
 You have the ability to see all the images in one single page.
 
-Click on each image to pull up a detailed page providing information on one single event (image). You will be able to see information around the Drone's status when the image was taken, location information, and what the Watson Visual Recognition service saw in the image and the confidence levels.
+Click on each image to pull up a detailed page providing information on one single event (image). You will be able to see information on what the Watson Visual Recognition service saw in the image and the confidence levels.
 
-If you go to the URL.mybluemix.net/simulator page you will be able to access a simulator to help you send images to the Cloudant database in case you do not have a way of using a drone to send data to the cloud. This simulator page can be your "drone". (data that is sent from the simulator is hardcoded within the program and can be changed by the developer after replicating it)
+You can click the ``Upload New Image`` button to send images to the Cloudant database.  
 
-# Extending the journey with Drone
+## Extending the journey with Drone
+
+This journey can be extended by adding a Drone to take images. A [DJI drone](http://developer.dji.com/) can be used to capture images and configured to send images to our Cloudant database.  As the image is received by the Cloudant database, the VR analysis and image detail can be displayed through the web UI.
 
 
-## Privacy Notice
 
 
 # License

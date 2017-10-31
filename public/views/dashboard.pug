@@ -98,28 +98,28 @@ div
 						thead
 							tr
 								th ID
-								th Aircraft
-								th Timestamp
-								th Region
+								th Name
 								th Analyzed?
+								th Timestamp
+								th Aircraft
 						tbody
 							each row in body.rows
 								if row.key.analysis == undefined
 									tr
 										td
 											a(href="./" + row.id)= row.id
-										td= row.key.aircraft
-										td= row.key.timestamp
-										td= row.key.region
+										td= row.key.name
 										td NO
+										td= row.key.timestamp
+										td= row.key.aircraft
 								else
 									tr
 										td
 											a(href="./" + row.id)= row.id
-										td= row.key.aircraft
-										td= row.key.timestamp
-										td= row.key.region
+										td= row.key.name
 										td YES
+										td= row.key.timestamp										
+										td= row.key.aircraft
 
 //- div
 	//- p= bodystring

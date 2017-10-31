@@ -35,11 +35,11 @@ function usage() {
 function install() {
   echo -e "${YELLOW}Installing..."
 
-  echo "Creating overwatch package"
-  bx wsk package create overwatch
+  echo "Creating image_db package"
+  bx wsk package create image_db
 
   echo "Adding VCAP_SERVICES as parameter"
-  bx wsk package update overwatch\
+  bx wsk package update image_db\
     --param cloudantUrl https://$CLOUDANT_USERNAME:$CLOUDANT_PASSWORD@$CLOUDANT_HOST\
     --param cloudantDbName $CLOUDANT_DB\
     --param watsonKey $VR_KEY\
@@ -51,34 +51,34 @@ function install() {
   echo "Binding cloudant"
    /whisk.system/cloudant
   bx wsk package bind /whisk.system/cloudant \
-    overwatch-cloudant\
+    image_db-cloudant\
     --param username $CLOUDANT_USERNAME\
     --param password $CLOUDANT_PASSWORD\
     --param host $CLOUDANT_HOST
 
   echo "Creating trigger"
-  bx wsk trigger create overwatch-cloudant-update-trigger --feed overwatch-cloudant/changes --param dbname $CLOUDANT_DB
+  bx wsk trigger create image_db-cloudant-update-trigger --feed image_db-cloudant/changes --param dbname $CLOUDANT_DB
 
   echo "Creating actions"
-  bx wsk action create overwatch/analysis analysis.js
+  bx wsk action create image_db/analysis analysis.js
 
   # No Longer Needed
-  #bx wsk action create overwatch/dataCleaner dataCleaner.js
+  #bx wsk action create image_db/dataCleaner dataCleaner.js
 
   echo "Creating change listener action"
-  #bx wsk action create overwatch-cloudant-changelistener changelistener.js --param targetNamespace $CURRENT_NAMESPACE
+  #bx wsk action create image_db-cloudant-changelistener changelistener.js --param targetNamespace $CURRENT_NAMESPACE
 
   #recently added to address removal of includeDoc support
   echo "Creating action sequence"
-#bx wsk action create sequenceAction --sequence overwatch-cloudant/read,overwatch-cloudant
-  bx wsk action create sequenceAction --sequence overwatch/analysis
+#bx wsk action create sequenceAction --sequence image_db-cloudant/read,image_db-cloudant
+  bx wsk action create sequenceAction --sequence image_db/analysis
 
   echo "Enabling change listener"
-#bx wsk rule create overwatch-rule overwatch-cloudant-update-trigger overwatch-cloudant-changelistener
-  bx wsk rule create overwatch-rule overwatch-cloudant-update-trigger overwatch/analysis
+#bx wsk rule create image_db-rule image_db-cloudant-update-trigger image_db-cloudant-changelistener
+  bx wsk rule create image_db-rule image_db-cloudant-update-trigger image_db/analysis
 
   echo "Set Cloudant Param on Trigger"
-  bx wsk trigger update overwatch-cloudant-update-trigger --param dbname $CLOUDANT_DB
+  bx wsk trigger update image_db-cloudant-update-trigger --param dbname $CLOUDANT_DB
 
   echo -e "${GREEN}Install Complete${NC}"
   bx wsk list
@@ -88,22 +88,22 @@ function uninstall() {
   echo -e "${RED}Uninstalling..."
 
   echo "Removing actions..."
-  bx wsk action delete overwatch/analysis
-  #bx wsk action delete overwatch/dataCleaner
+  bx wsk action delete image_db/analysis
+  #bx wsk action delete image_db/dataCleaner
 
   echo "Removing rule..."
-  bx wsk rule disable overwatch-rule
-  bx wsk rule delete overwatch-rule
+  bx wsk rule disable image_db-rule
+  bx wsk rule delete image_db-rule
 
   #echo "Removing change listener..."
-  #bx wsk action delete overwatch-cloudant-changelistener
+  #bx wsk action delete image_db-cloudant-changelistener
 
   echo "Removing trigger..."
-  bx wsk trigger delete overwatch-cloudant-update-trigger
+  bx wsk trigger delete image_db-cloudant-update-trigger
 
   echo "Removing packages..."
-  bx wsk package delete overwatch-cloudant
-  bx wsk package delete overwatch
+  bx wsk package delete image_db-cloudant
+  bx wsk package delete image_db
 
   echo -e "${GREEN}Uninstall Complete${NC}"
   bx wsk list
