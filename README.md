@@ -9,7 +9,7 @@ When the reader has completed this journey, they will understand how to:
 * Train Visual Recognition to classify images
 * Configure Cloudant database to store and retrieve image data
 * Set up IBM Cloud Functions to trigger Visual Recognition analysis and store result in Cloudant database
-* Launch a web app to view a dashboard of the Visual Recognition analysis, and deploy to Bluemix
+* Launch a web app to view a dashboard of the Visual Recognition analysis, and deploy to IBM Cloud
 
 # Architecture Flow
 
@@ -28,7 +28,7 @@ When the reader has completed this journey, they will understand how to:
 ## Included Components
 + [Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/)
 + [Cloudant](https://www.ibm.com/analytics/us/en/technology/cloud-data-services/cloudant/)
-+ [Cloud Functions](https://console.bluemix.net/openwhisk)
++ [IBM Cloud Functions](https://console.bluemix.net/openwhisk)
 
 
 ## Featured technologies
@@ -48,7 +48,7 @@ Follow these steps to setup and run this developer journey. The steps are descri
 
 ## 1. Watson Visual Recognition Setup
 
-Create the [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) service in Bluemix.  You will need the ``API Key``.
+Create the [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) service in IBM Cloud.  You will need the ``API Key``.
 
 Open a command line interface (CLI) on your desktop and clone this repo:
 ```
@@ -76,7 +76,7 @@ You can find more information on working with your classifier [here](https://con
 
 ## 2. Cloudant NoSQL DB Setup
 
-Create the [Cloudant NoSQL](https://www.ibm.com/analytics/us/en/technology/cloud-data-services/cloudant/) service in Bluemix
+Create the [Cloudant NoSQL](https://www.ibm.com/analytics/us/en/technology/cloud-data-services/cloudant/) service in IBM Cloud.
 
 Create a new database in Cloudant called <strong>image_db</strong>
 
@@ -170,7 +170,7 @@ The above command will setup the OpenWhisk actions for you, there should be no n
 
 #### Explore IBM Cloud Functions
 
-In IBM, look for ``Functions`` in ``Catalog``
+In IBM Cloud, look for ``Functions`` in ``Catalog``
 
 There you will see a UI to ``Manage`` and ``Monitor`` the service. In addition, it has information for ``Getting Started`` and even ``Develop`` actions.
 
@@ -199,11 +199,11 @@ npm start
 
 Test your application by going to: [http://localhost:3000/](http://localhost:3000/)
 
-#### Deploy to Bluemix
+#### Deploy to IBM Cloud
 
-You can push the app hosted locally by first editing the ```manifest.yml``` file and then use cloud foundry cli to push it to Bluemix.
+You can push the app to IBM Cloud by first editing the ```manifest file``` file and then using cloud foundry cli commands.
 
-Edit the `manifest.yml` file in the folder that contains your code and replace with a unique name for your application. The name that you specify determines the application's URL, such as `your-application-name.mybluemix.net`. Additionally - update the service names so they match what you have in Bluemix. The relevant portion of the `manifest.yml` file looks like the following:
+Edit the `manifest.yml` file in the folder that contains your code and replace with a unique name for your application. The name that you specify determines the application's URL, such as `your-application-name.mybluemix.net`. Additionally - update the service names so they match what you have in IBM Cloud. The relevant portion of the `manifest.yml` file looks like the following:
 
 ```
 applications:
@@ -218,7 +218,7 @@ applications:
   - {visual-recognition}
 ```
 
-In the command use the following command to push the application to bluemix:
+In the command line use the following command to push the application to IBM Cloud:
 ```
 cf push
 ```
@@ -274,8 +274,8 @@ The ``setup_functions.sh`` have different commands to uninstall, re-install or u
 ```
 
 
-#### Bluemix application
-To troubleshoot your Bluemix application, use the logs. To see the logs, run:
+#### IBM Cloud application
+To troubleshoot your IBM Cloud application, use the logs. To see the logs, run:
 
 ```bash
 cf logs <application-name> --recent
