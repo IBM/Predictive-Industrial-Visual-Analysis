@@ -175,7 +175,7 @@ In IBM, look for ``Functions`` in ``Catalog``
 There you will see a UI to ``Manage`` and ``Monitor`` the service. In addition, it has information for ``Getting Started`` and even ``Develop`` actions.
 
 <p align="center">
-  <img width="600"  src="readme_images\cloud_functions_scrnshot.png">
+  <img width="800"  src="readme_images\cloud_functions_scrnshot.png">
 </p>
 
 
@@ -227,7 +227,7 @@ cf push
 #### Application
 
 <p align="center">
-  <img width="600"  src="readme_images\dashboard_scrnshot.png">
+  <img width="800"  src="readme_images\dashboard_scrnshot.png">
 </p>
 
 
