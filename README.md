@@ -2,9 +2,7 @@
 
 In this developer journey, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the classifier, on how closely the image matches one of the damaged classification or the Normal classification.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
 
-The images data is stored in a Cloundant database which makes it easier to connect remote devices (including drones) to capture images.  The database can be used to store different properties of the images like location and description.  
-
-This journey demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data. This journey presents the analysis result in a web app with a dashboard showing the attention required for the equipment in each image.
+The images data is stored in a Cloundant database which makes it easier to connect remote devices (including drones) to capture images.  The database can store different properties of the images like location and description.  This journey demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data.
 
 When the reader has completed this journey, they will understand how to:
 
@@ -119,11 +117,23 @@ Log in to Bluemix, and target a Region (i.e api.ng.bluemix.net), Organization (i
 bx login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
 ```
 
-bx login --sso -a api.ng.bluemix.net -o Raheel.Zubairy -s dev
+#### API Authentication and Host
+
+We will need the API authentication key and host.
+
+Command to retrieve API host:
+```
+bx wsk property get --apihost
+```
+
+Command to retrieve API authentication key:
+```
+bx wsk property get --auth
+```
 
 #### Configure .env file
 
-You will need to provide credentials to your Cloudant NoSQL database and Watson Visual Recognition service and Cloud Functions Host/Auth information in a `.env file`. Copy the sample `.env.example` file using the following command:
+You will need to provide credentials to your Cloudant NoSQL database and Watson Visual Recognition service, and Cloud Functions Host/Auth information retrieved in the previous step, into a `.env file`. Copy the sample `.env.example` file using the following command:
 
 ```
 cp .env.example .env
@@ -149,7 +159,6 @@ FUNCTIONS_AUTHORIZATION=
 
 #### Run setup_functions.sh
 
-
 We will now run the ``setup_functions.sh`` file to set up the microservice which triggers the Visual Recognition analysis as an image is added to the Cloudant database.
 
 ```
@@ -157,6 +166,18 @@ chmod +x setup_functions.sh
 ./setup_functions.sh --install
 ```
 The above command will setup the OpenWhisk actions for you, there should be no need to do anything else if you see an Install Complete message with green OK signs in the CLI.
+
+
+#### Explore IBM Cloud Functions
+
+In IBM, look for ``Functions`` in ``Catalog``
+
+There you will see a UI to ``Manage`` and ``Monitor`` the service. In addition, it has information for ``Getting Started`` and even ``Develop`` actions.
+
+<p align="center">
+  <img width="600"  src="readme_images\cloud_functions_scrnshot.png">
+</p>
+
 
 ## 4. Run Web Application
 
@@ -211,18 +232,54 @@ cf push
 
 
 The app has the following functions:
-The homepage displays a quick dashboard showing the number of images in the Cloudant database and how many of them have Watson VR analysis completed. It will also provide a count of how many images were deemed as "Needing attention" based on the response the Watson service provided when classifying the images.
+* The homepage displays a quick dashboard showing the number of images in the Cloudant database and how many of them have Watson VR analysis completed. It will also provide a count of how many images were deemed as "Needing attention" based on the response the Watson service provided when classifying the images.
 
-You have the ability to see all the images in one single page.
+* You have the ability to see all the images in one single page.
 
-Click on each image to pull up a detailed page providing information on one single event (image). You will be able to see information on what the Watson Visual Recognition service saw in the image and the confidence levels.
+* Click on each image to pull up a detailed page providing information on one single event (image). You will be able to see information on what the Watson Visual Recognition service saw in the image and the confidence levels.  You can continue to train the service by using the thumbs up and thumbs down next to each percent match.
 
-You can click the ``Upload New Image`` button to send images to the Cloudant database.  There are sample images in the ``sample-images`` folder to try out.
+* You can click the ``Upload New Image`` button to send images to the Cloudant database.  There are sample images in the ``sample-images`` folder to try out.
 
 ## Extending the journey with Drone
 
 This journey can be extended by adding a Drone to take images. A [DJI drone](http://developer.dji.com/) can be used to capture images and configured to send images to our Cloudant database.  As the image is received by the Cloudant database, the VR analysis and image detail can be displayed through the web UI.
 
+## Troubleshooting
+
+#### Visual Recognition
+If you invoke ``GET /classifiers`` with ``verbose=1`` what do you see? If that list is empty, and you get this error message, you should open an IBM Bluemix support ticket. If it's not empty, you should use ``DELETE /classifiers/{classifier_id}`` to remove the existing classifier so that you can create your new one.
+
+#### IBM Cloud Functions
+
+The ``setup_functions.sh`` have different commands to uninstall, re-install or update IBM Cloud Functions. And to view the env credentials used by IBM Cloud Functions.
+
+* Uninstall:
+```
+./setup_functions.sh --uninstall
+```
+
+* Re-install:
+```
+./setup_functions.sh --reinstall
+```
+
+* Show env cred:
+```
+./setup_functions.sh --env
+```
+
+* Update:
+```
+./setup_functions.sh --update
+```
+
+
+#### Bluemix application
+To troubleshoot your Bluemix application, use the logs. To see the logs, run:
+
+```bash
+cf logs <application-name> --recent
+```
 
 
 
