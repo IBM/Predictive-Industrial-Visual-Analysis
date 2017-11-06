@@ -1,10 +1,10 @@
 # Industrial Visual Analysis
 
-In this developer journey, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the classifier, on how closely the image matches one of the damaged classification or the Normal classification.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
+In this code pattern, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to classify oil and gas pipelines into six classifications - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the classifier, on how closely the image matches one of the damaged classification or the Normal classification.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
 
-The images data is stored in a Cloundant database which makes it easier to connect remote devices (including drones) to capture images.  The database can store different properties of the images like location and description.  This journey demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data.
+The images data is stored in a Cloundant database which makes it easier to connect remote devices (including drones) to capture images.  The database can store different properties of the images like location and description.  This code pattern demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data.
 
-When the reader has completed this journey, they will understand how to:
+When the reader has completed this code pattern, they will understand how to:
 
 * Train Visual Recognition to classify images
 * Configure Cloudant database to store and retrieve image data
@@ -19,7 +19,7 @@ When the reader has completed this journey, they will understand how to:
 
 1. User uploads the image through the web UI
 2. The image data is send to the Cloudant database
-3. As the image is inserted into the database, the Cloud Functions triggers mircoservice
+3. As the image is added into the database, the Cloud Functions triggers mircoservice
 4. The microservice analyzes the image using the trained Watson Visual Recognition service
 5. The analyzed data is fed back into the Cloudant database
 6. The dashboard on the web UI displays the Visual Recognition analysis and images requiring attention
@@ -37,7 +37,7 @@ When the reader has completed this journey, they will understand how to:
 - [curl](https://curl.haxx.se/download.html)
 
 # Running the Application
-Follow these steps to setup and run this developer journey. The steps are described in detail below.
+Follow these steps to setup and run the application. The steps are described in detail below.
 
 ## Steps
 1. [Watson Visual Recognition Setup](#1-Watson-Visual-Recognition-Setup)
@@ -85,7 +85,7 @@ Create a new database in Cloudant called <strong>image_db</strong>
 </p>
 
 
-Next, create a view on the database with the design name ``image_db.images``, index name ``image_db.images``, and use the following map function:
+Next, create a view on the database with the design name ``image_db_images``, index name ``image_db.images``, and use the following map function:
 ```
 function (doc) {
 if ( doc.type == 'image_db.image' ) {
@@ -240,9 +240,9 @@ The app has the following functions:
 
 * You can click the ``Upload New Image`` button to send images to the Cloudant database.  There are sample images in the ``sample-images`` folder to try out.
 
-## Extending the journey with Drone
+## Extending the pattern with Drone
 
-This journey can be extended by adding a Drone to take images. A [DJI drone](http://developer.dji.com/) can be used to capture images and configured to send images to our Cloudant database.  As the image is received by the Cloudant database, the VR analysis and image detail can be displayed through the web UI.
+This code pattern can be extended by adding a Drone to take images. A [DJI drone](http://developer.dji.com/) can be used to capture images and configured to send images to our Cloudant database.  As the image is received by the Cloudant database, the VR analysis and image detail can be displayed through the web UI.
 
 ## Troubleshooting
 
