@@ -52,12 +52,12 @@ Create the [Watson Visual Recognition](https://www.ibm.com/watson/services/visua
 
 Open a command line interface (CLI) on your desktop and clone this repo:
 ```
-git clone https://github.com/IBM/Industrial-Visual-Analysis
+git clone https://github.com/IBM/Predictive-Industrial-Visual-Analysis
 ```
 
 Go to the folder where the images are placed
 ```
-cd Industrial-Visual-Analysis/vr-image-data
+cd Predictive-Industrial-Visual-Analysis/vr-image-data
 ```
 
 Here we will create a classifier using the zipped images to train the Watson Visual-Recognition service. The images in each zipped folder are used to make the Watson VR service become familiar with the images that relate to the different categories (Corrosion, Leak, etc.). Run the following command to submit all 6 sets of images to the Watson service classifier:
