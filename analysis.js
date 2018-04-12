@@ -122,7 +122,13 @@ function main(args) {
         var p8 = function(cloudantDocument) {
             var promise = new Promise(function(resolve, reject) {
                                       cloudantDocument.weather = {};
-                                      var request = require('request');
+                                      if (true) {
+                                            resolve(cloudantDocument);
+                                          }
+                                          else {
+                                            reject(Error("It broke"));
+                                          }
+                                      /*var request = require('request');
                                       var weatherURL = "http://api.weather.com/v1/geocode/" + cloudantDocument.latitude + "/" + cloudantDocument.longitude + "/" + "observations/current.json?apiKey=1444d4d6bddd51aed785972d0a06e49b";
                                       request(weatherURL, function (error, response, body) {
                                               if(error){
@@ -134,7 +140,7 @@ function main(args) {
                                               cloudantDocument.weather = JSON.parse(body);
                                               resolve(cloudantDocument);
                                               }
-                                              });
+                                            });*/
                                       });
             return promise;
         };

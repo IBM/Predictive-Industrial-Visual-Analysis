@@ -43,6 +43,7 @@ var vr_url = vrCredentials.url || process.env.VR_URL;
 var vr_classifiers = process.env.VR_CLASSIFIERS;
 
 console.log (cloudant_url);
+console.log (vr_key);
 
 // Initialize Cloudant DB
 var cloudant = Cloudant(cloudant_url);

@@ -139,7 +139,7 @@ You will need to provide credentials to your Cloudant NoSQL database and Watson 
 cp .env.example .env
 ```
 
-and fill in your credentials.
+and fill in your credentials and your VR Classifier name.
 
 ```
 #From cloudant NoSQL database
@@ -151,7 +151,7 @@ CLOUDANT_DB=image_db
 #From Watson Visual Recognition Service
 VR_KEY=
 VR_URL=
-VR_CLASSIFIERS=default,OilPipeCondition
+VR_CLASSIFIERS=default,OilPipeCondition_1063693116
 #From OpenWhisk Functions Service in Bluemix
 FUNCTIONS_APIHOST=
 FUNCTIONS_AUTHORIZATION=
