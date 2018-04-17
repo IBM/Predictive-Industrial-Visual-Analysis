@@ -66,13 +66,10 @@ function main(args) {
                                       db.get(cloudantDocument.args.id, null, function(error, response) {
                                              if (!error) {
                                              console.log("Get DOC from cloudant successful " + JSON.stringify(response));
-                                             //console.log(JSON.stringify(cloudantDocument));
+
                                              //Adding args to cloudant document for future reference
                                              response.args = cloudantDocument.args;
                                              cloudantDocument = response;
-                                             //console.log(JSON.stringify(cloudantDocument));
-
-                                             //console.log("Value of cloudant Document is: " + JSON.stringify(cloudantDocument));
 
                                              console.log("Entered Main Analysis Implementation");
 
@@ -128,19 +125,6 @@ function main(args) {
                                           else {
                                             reject(Error("It broke"));
                                           }
-                                      /*var request = require('request');
-                                      var weatherURL = "http://api.weather.com/v1/geocode/" + cloudantDocument.latitude + "/" + cloudantDocument.longitude + "/" + "observations/current.json?apiKey=1444d4d6bddd51aed785972d0a06e49b";
-                                      request(weatherURL, function (error, response, body) {
-                                              if(error){
-                                              console.log('error:', error); // Print the error if one occurred
-                                              reject(error);
-                                              } else {
-                                              console.log('statusCode:', JSON.stringify(response) && response.statusCode); // Print the response status code if a response was received
-                                              console.log('body:', JSON.stringify(body));
-                                              cloudantDocument.weather = JSON.parse(body);
-                                              resolve(cloudantDocument);
-                                              }
-                                            });*/
                                       });
             return promise;
         };
