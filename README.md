@@ -1,4 +1,4 @@
-# Industrial Visual Analysis
+# [Industrial Visual Analysis](https://developer.ibm.com/code/patterns/industrial-visual-analysis/)
 
 In this code pattern, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to inspect oil and gas pipelines with six identifiers - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the category, on how closely the image matches one of the damaged identifiers or the Normal identifier.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
 
@@ -44,6 +44,8 @@ Follow these steps to setup and run the application. The steps are described in 
 2. [Cloudant NoSQL DB Setup](#2-Cloudant-NoSQL-DB-Setup)
 3. [IBM Cloud Functions Setup](#3-IBM-Cloud-Functions-Setup)
 4. [Run Web Application](#4-Run-Web-Application)
+5. Saves back in Cloudant database
+6. Sends it back to the web UI
 
 
 ## 1. Watson Visual Recognition Setup
@@ -112,7 +114,7 @@ Install the Cloud Functions Plugin
 bx plugin install Cloud-Functions -r Bluemix
 ```
 
-Log in to Bluemix, and target a Region (i.e api.ng.bluemix.net), Organization (i.e Raheel.Zubairy) and Space (i.e dev).
+Log in to IBM Cloud, and target a Region (i.e api.ng.bluemix.net), Organization (i.e Raheel.Zubairy) and Space (i.e dev).
 ```
 bx login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
 ```
@@ -152,7 +154,7 @@ CLOUDANT_DB=image_db
 VR_KEY=
 VR_URL=
 VR_CLASSIFIERS=default,OilPipeCondition_1063693116
-#From OpenWhisk Functions Service in Bluemix
+#From OpenWhisk Functions Service in IBM Cloud
 FUNCTIONS_APIHOST=
 FUNCTIONS_AUTHORIZATION=
 ```
@@ -247,7 +249,7 @@ This code pattern can be extended by adding a Drone to take images. A [DJI drone
 ## Troubleshooting
 
 #### Visual Recognition
-If you invoke ``GET /classifiers`` with ``verbose=1`` what do you see? If that list is empty, and you get this error message, you should open an IBM Bluemix support ticket. If it's not empty, you should use ``DELETE /classifiers/{classifier_id}`` to remove the existing classifier so that you can create your new one.
+If you invoke ``GET /classifiers`` with ``verbose=1`` what do you see? If that list is empty, and you get this error message, you should open an IBM Cloud support ticket. If it's not empty, you should use ``DELETE /classifiers/{classifier_id}`` to remove the existing classifier so that you can create your new one.
 
 #### IBM Cloud Functions
 
@@ -281,6 +283,17 @@ To troubleshoot your IBM Cloud application, use the logs. To see the logs, run:
 cf logs <application-name> --recent
 ```
 
+## <h2>Learn more</h2>
+<ul>
+<li><strong>Artificial Intelligence Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/artificial-intelligence/" rel="nofollow">AI Code Patterns</a>.</li>
+<li><strong>Data Analytics Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/data-science/" rel="nofollow">Data Analytics Code Patterns</a></li>
+<li><strong>AI and Data Code Pattern Playlist</strong>: Bookmark our <a href="https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde" rel="nofollow">playlist</a> with all of our Code Pattern videos</li>
+<li><strong>With Watson</strong>: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? <a href="https://www.ibm.com/watson/with-watson/" rel="nofollow">Join the With Watson program</a> to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.</li>
+<li><strong>Data Science Experience</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Data Science Experience</a></li>
+<li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/ms-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
+<li><strong>Spark on IBM Cloud</strong>: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our <a href="https://console.bluemix.net/catalog/services/apache-spark" rel="nofollow">Spark service</a></li>
+<li><strong>Kubernetes on IBM Cloud</strong>: Deliver your apps with the combined the power of <a href="https://www.ibm.com/cloud-computing/bluemix/containers" rel="nofollow">Kubernetes and Docker on IBM Cloud</a></li>
+</ul>
 
 
 # License
