@@ -27,6 +27,7 @@
 		"jsonfile": "^2.2.3",
 		"passport": "*",
 		"request": "^2.65.0",
+		"metrics-tracker-client": "*",
 		"watson-developer-cloud": "^1.2.4",
 		"pug": "2.0.0-beta11"
 	},

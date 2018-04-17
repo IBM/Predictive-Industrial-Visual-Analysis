@@ -1,4 +1,4 @@
-
+require('metrics-tracker-client').track();
 require('dotenv').config();
 // Libraries
 var express = require('express'),

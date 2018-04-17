@@ -1,0 +1,10 @@
+id: Predictive-Industrial-Visual-Analysis
+event_id: web
+event_organizer: dev-journeys
+runtimes:
+  - Cloud Foundry
+services:
+  - Internet of Things Platform
+  - Cloudant NoSQL DB
+  - Functions
+  - Visual Recognition
