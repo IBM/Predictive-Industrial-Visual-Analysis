@@ -7,7 +7,7 @@ declared-services:
     plan: Lite
 applications:
 - path: .
-  memory: 1024M
+  memory: 512M
   instances: 1
   domain: mybluemix.net
   name: industrial-visual-analysis

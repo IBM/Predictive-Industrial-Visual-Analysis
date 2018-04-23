@@ -203,7 +203,7 @@ Test your application by going to: [http://localhost:3000/](http://localhost:300
 
 #### Deploy to IBM Cloud
 
-[![](https://raw.githubusercontent.com/IBM/manage-control-device-node-red/master/images/deploy-btn.PNG)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/Predictive-Industrial-Visual-Analysis)
+[![](readme_images/deploy_btm_cloud.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/Predictive-Industrial-Visual-Analysis)
 
 
 You can push the app to IBM Cloud by first editing the ```manifest file``` file and then using cloud foundry cli commands.
@@ -225,7 +225,7 @@ applications:
 
 In the command line use the following command to push the application to IBM Cloud:
 ```
-cf push
+bx app push YOUR_APP_NAME
 ```
 
 
@@ -283,7 +283,7 @@ The ``setup_functions.sh`` have different commands to uninstall, re-install or u
 To troubleshoot your IBM Cloud application, use the logs. To see the logs, run:
 
 ```bash
-cf logs <application-name> --recent
+bx app logs <application-name> --recent
 ```
 
 ## <h2>Learn more</h2>
@@ -292,7 +292,7 @@ cf logs <application-name> --recent
 <li><strong>Data Analytics Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/data-science/" rel="nofollow">Data Analytics Code Patterns</a></li>
 <li><strong>AI and Data Code Pattern Playlist</strong>: Bookmark our <a href="https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde" rel="nofollow">playlist</a> with all of our Code Pattern videos</li>
 <li><strong>With Watson</strong>: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? <a href="https://www.ibm.com/watson/with-watson/" rel="nofollow">Join the With Watson program</a> to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.</li>
-<li><strong>Data Science Experience</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Data Science Experience</a></li>
+<li><strong>Watson Studios</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Data Science Experience</a></li>
 <li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/ms-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
 <li><strong>Spark on IBM Cloud</strong>: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our <a href="https://console.bluemix.net/catalog/services/apache-spark" rel="nofollow">Spark service</a></li>
 <li><strong>Kubernetes on IBM Cloud</strong>: Deliver your apps with the combined the power of <a href="https://www.ibm.com/cloud-computing/bluemix/containers" rel="nofollow">Kubernetes and Docker on IBM Cloud</a></li>
