@@ -2,7 +2,7 @@
 
 In this code pattern, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to inspect oil and gas pipelines with six identifiers - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the category, on how closely the image matches one of the damaged identifiers or the Normal identifier.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
 
-The images data is stored in a Cloundant database which makes it easier to connect remote devices (including drones) to capture images.  The database can store different properties of the images like location and description.  This code pattern demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data.
+The images data is stored in a Cloudant database which makes it easier to connect remote devices (including drones) to capture images.  The database can store different properties of the images like location and description.  This code pattern demonstrates IBM Cloud Functions (OpenWhisk) to trigger microservice as an image is added to the Cloudant database.  The microservice performs the Visual Recognition analysis and updates the Cloudant database with the analysis data.
 
 When the reader has completed this code pattern, they will understand how to:
 
@@ -19,7 +19,7 @@ When the reader has completed this code pattern, they will understand how to:
 
 1. User uploads the image through the web UI
 2. The image data is send to the Cloudant database
-3. As the image is added into the database, the Cloud Functions triggers mircoservice
+3. As the image is added into the database, the Cloud Functions triggers microservice
 4. The microservice analyzes the image using the trained Watson Visual Recognition service
 5. The analyzed data is fed back into the Cloudant database
 6. The dashboard on the web UI displays the Visual Recognition analysis and images requiring attention
@@ -68,7 +68,7 @@ Here we will create a classifier using the zipped images to train the Watson Vis
 curl -X POST -F "Bursted_Pipe_positive_examples=@Burst_Images.zip" -F "Corroded_Pipe_positive_examples=@Corrosion_Images.zip" -F "Damaged_Coating_positive_examples=@Damaged_Coating_Images.zip" -F "Joint_Failure_positive_examples=@Joint_Failure_Images.zip" -F "Pipe_Leak_positive_examples=@Leak_Images.zip" -F "Normal_Condition_positive_examples=@Normal_Condition.zip" -F "name=OilPipeCondition" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key={INSERT-YOUR-API-KEY-HERE}&version=2016-05-20"
 ```
 
-The response from above will provide you with a status on the submission and will give you a CLASSIFIER_ID. Please copy this for future use as well. After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
+The response from above will provide you with a status on the submission and will give you a `CLASSIFIER_ID``. Please copy this for future use as well. After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
 
 ```
 curl -X GET "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2016-05-20"
