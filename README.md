@@ -1,3 +1,6 @@
+**__Skill Level__**: Beginner
+<br>**__N.B__**: All services used in this repo are Lite plans.
+
 # [Industrial Visual Analysis](https://developer.ibm.com/code/patterns/industrial-visual-analysis/)
 
 In this code pattern, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to inspect oil and gas pipelines with six identifiers - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the category, on how closely the image matches one of the damaged identifiers or the Normal identifier.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
