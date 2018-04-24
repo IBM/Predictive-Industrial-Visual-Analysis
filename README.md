@@ -55,12 +55,12 @@ Follow these steps to setup and run the application. The steps are described in 
 
 Create the [Watson Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/) service in IBM Cloud.  You will need the ``API Key``.
 
-Open a command line interface (CLI) on your desktop and clone this repo:
+* Open a command line interface (CLI) on your desktop and clone this repo:
 ```
 git clone https://github.com/IBM/Predictive-Industrial-Visual-Analysis
 ```
 
-Go to the folder where the images are placed
+* Go to the folder where the images are placed
 ```
 cd Predictive-Industrial-Visual-Analysis/vr-image-data
 ```
@@ -71,7 +71,7 @@ Here we will create a classifier using the zipped images to train the Watson Vis
 curl -X POST -F "Bursted_Pipe_positive_examples=@Burst_Images.zip" -F "Corroded_Pipe_positive_examples=@Corrosion_Images.zip" -F "Damaged_Coating_positive_examples=@Damaged_Coating_Images.zip" -F "Joint_Failure_positive_examples=@Joint_Failure_Images.zip" -F "Pipe_Leak_positive_examples=@Leak_Images.zip" -F "Normal_Condition_positive_examples=@Normal_Condition.zip" -F "name=OilPipeCondition" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key={INSERT-YOUR-API-KEY-HERE}&version=2016-05-20"
 ```
 
-The response from above will provide you with a status on the submission and will give you a `CLASSIFIER_ID``. Please copy this for future use as well. After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
+The response from above will provide you with a status on the submission and will give you a `CLASSIFIER_ID`. Please copy this for future use as well. After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
 
 ```
 curl -X GET "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2016-05-20"
@@ -108,16 +108,14 @@ if ( doc.type == 'image_db.image' ) {
 
 We will now set up the IBM Cloud Functions (OpenWhisk) using Bluemix CLI.
 
-#### Setup Bluemix CLI
+#### [Setup and download the Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/download_cli.html#download_install)
 
-First download [Bluemix Cli](https://console.bluemix.net/docs/cli/reference/bluemix_cli/download_cli.html#download_install)
-
-Install the Cloud Functions Plugin
+* Install the Cloud Functions Plugin
 ```
 bx plugin install Cloud-Functions -r Bluemix
 ```
 
-Log in to IBM Cloud, and target a Region (i.e api.ng.bluemix.net), Organization (i.e Raheel.Zubairy) and Space (i.e dev).
+* Log in to IBM Cloud, and target a Region (i.e api.ng.bluemix.net), Organization (i.e Raheel.Zubairy) and Space (i.e dev).
 ```
 bx login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
 ```
@@ -126,15 +124,18 @@ bx login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
 
 We will need the API authentication key and host.
 
-Command to retrieve API host:
+* Command to retrieve API host:
 ```
 bx wsk property get --apihost
 ```
 
-Command to retrieve API authentication key:
+* Command to retrieve API authentication key:
 ```
 bx wsk property get --auth
 ```
+
+__N.B:__ make sure what plan (Lite, etc.) you are associating when creating this service.
+
 
 #### Configure .env file
 
@@ -190,13 +191,13 @@ There you will see a UI to ``Manage`` and ``Monitor`` the service. In addition, 
 
 To run the app, go to the ```Industrial-Visual-Analysis``` folder and run the following commands.
 
-Install the dependencies you application need:
+* Install the dependencies you application need:
 
 ```
 npm install
 ```
 
-Start the application locally:
+* Start the application locally:
 
 ```
 npm start
@@ -295,7 +296,7 @@ bx app logs <application-name> --recent
 <li><strong>Data Analytics Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/data-science/" rel="nofollow">Data Analytics Code Patterns</a></li>
 <li><strong>AI and Data Code Pattern Playlist</strong>: Bookmark our <a href="https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde" rel="nofollow">playlist</a> with all of our Code Pattern videos</li>
 <li><strong>With Watson</strong>: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? <a href="https://www.ibm.com/watson/with-watson/" rel="nofollow">Join the With Watson program</a> to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.</li>
-<li><strong>Watson Studios</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Data Science Experience</a></li>
+<li><strong>Watson Studios</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Watson Studios</a></li>
 <li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/ms-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
 <li><strong>Spark on IBM Cloud</strong>: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our <a href="https://console.bluemix.net/catalog/services/apache-spark" rel="nofollow">Spark service</a></li>
 <li><strong>Kubernetes on IBM Cloud</strong>: Deliver your apps with the combined the power of <a href="https://www.ibm.com/cloud-computing/bluemix/containers" rel="nofollow">Kubernetes and Docker on IBM Cloud</a></li>
