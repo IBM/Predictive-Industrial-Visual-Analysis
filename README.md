@@ -207,7 +207,7 @@ Test your application by going to: [http://localhost:3000/](http://localhost:300
 
 #### Deploy to IBM Cloud
 
-[![](readme_images/deploy_btm_cloud.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/Predictive-Industrial-Visual-Analysis)
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/Predictive-Industrial-Visual-Analysis)
 
 
 You can push the app to IBM Cloud by first editing the ```manifest file``` file and then using cloud foundry cli commands.
