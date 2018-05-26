@@ -49,7 +49,6 @@ function install() {
 
   # we will need to listen to cloudant event
   echo "Binding cloudant"
-   /whisk.system/cloudant
   bx wsk package bind /whisk.system/cloudant \
     image_db-cloudant\
     --param username $CLOUDANT_USERNAME\

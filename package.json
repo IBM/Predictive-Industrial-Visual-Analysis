@@ -18,8 +18,7 @@
 		"cfenv": "1.0.x",
 		"archiver": "^1.0.1",
 		"async": "^2.0.1",
-		"cf-deployment-tracker-client": "0.0.8",
-		"cloudant": "^1.4.1",
+		"cloudant": "^1.10.x",
 		"connect-busboy": "*",
 		"gm": "^1.23.0",
 		"jade": "^1.11.0",
@@ -32,6 +31,6 @@
 	},
 	"repository": {},
 	"engines": {
-		"node": "4.x"
+		"node": "6.x"
 	}
 }

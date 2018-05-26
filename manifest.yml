@@ -7,7 +7,7 @@ declared-services:
     plan: Lite
 applications:
 - path: .
-  memory: 512M
+  memory: 256M
   instances: 1
   domain: mybluemix.net
   name: industrial-visual-analysis
@@ -15,4 +15,4 @@ applications:
   disk_quota: 1024M
   services:
   - visual-recognition
-  - cloudant-images
+  - cloudant-images 
