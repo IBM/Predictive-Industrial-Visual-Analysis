@@ -536,10 +536,9 @@ function analyzeImage(doc, fileName, analyzeCallback) {
                     fs.createReadStream(fileName).pipe(
                                                        request({
                                                                method: "POST",
-                                                               url: "https://gateway-a.watsonplatform.net" +
+                                                               url: "https://apikey:" + doc.args.watsonKey + "@gateway.watsonplatform.net" +
                                                                "/visual-recognition/api/v3/detect_faces" +
-                                                               "?api_key=" + doc.args.watsonKey +
-                                                               "&version=2016-05-20",
+                                                               "?version=2018-03-19",
                                                                headers: {
                                                                'Content-Length': fs.statSync(fileName).size
                                                                },
@@ -565,10 +564,9 @@ function analyzeImage(doc, fileName, analyzeCallback) {
                     fs.createReadStream(fileName).pipe(
                                                        request({
                                                                method: "POST",
-                                                               url: "https://gateway-a.watsonplatform.net" +
+                                                               url: "https://apikey:" + doc.args.watsonKey + "@gateway.watsonplatform.net" +
                                                                "/visual-recognition/api/v3/classify" +
-                                                               "?api_key=" + doc.args.watsonKey +
-                                                               "&version=2016-05-20&threshold=0.0&owners=me,IBM&classifier_ids=" + doc.args.watsonClassifiers,
+                                                               "?version=2018-03-19&threshold=0.0&owners=me,IBM&classifier_ids=" + doc.args.watsonClassifiers,
                                                                headers: {
                                                                'Content-Length': fs.statSync(fileName).size
                                                                },
@@ -593,10 +591,9 @@ function analyzeImage(doc, fileName, analyzeCallback) {
                     fs.createReadStream(fileName).pipe(
                                                        request({
                                                                method: "POST",
-                                                               url: "https://gateway-a.watsonplatform.net" +
+                                                               url: "https://apikey:" + doc.args.watsonKey + "@gateway.watsonplatform.net" +
                                                                "/visual-recognition/api/v3/recognize_text" +
-                                                               "?api_key=" + doc.args.watsonKey +
-                                                               "&version=2016-05-20",
+                                                               "?version=2018-03-19",
                                                                headers: {
                                                                'Content-Length': fs.statSync(fileName).size
                                                                },

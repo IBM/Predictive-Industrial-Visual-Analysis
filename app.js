@@ -798,7 +798,7 @@ app.post('/:id?/retrain/:posneg?/:classifierId?/:classifierClass?', function (re
                             formData[classifierClass + "_positive_examples"] = fs.createReadStream("./training/tennis_positive.zip");
                             formData["negative_examples"] = fs.createReadStream(zipFile);
                         }
-                        var url = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/" + classifierId +"?api_key=" + vr_key + "&version=2016-05-20";
+                        var url = "https://apikey:" + vr_key + "gateway.watsonplatform.net/visual-recognition/api/v3/classifiers/" + classifierId +"?version=2018-03-19";
 
                         request.post({url:url, formData: formData}, function optionalCallback(err, httpResponse, body) {
                             if (err) {
@@ -828,7 +828,3 @@ app.post('/:id?/retrain/:posneg?/:classifierId?/:classifierClass?', function (re
 var port = ( process.env.PORT || 3000 );
 app.listen( port );
 console.log( 'Application is listening at: ' + port );
-
-
-
-require("cf-deployment-tracker-client").track();
