@@ -220,8 +220,13 @@ applications:
   name: {industrial-visual-analysis}
   disk_quota: 1024M
   services:
-  - {cloudant}
-  - {visual-recognition}
+  - {cloudant-service}
+  - {visual-recognition-service}
+```
+
+Create a cloud foundry service as alias for the visual recognition service:
+```
+ibmcloud resource service-alias-create "{visual-recognition-service}" --instance-name "{visual-recognition-service}" -s Dev
 ```
 
 In the command line use the following command to push the application to IBM Cloud:
