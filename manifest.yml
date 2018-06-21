@@ -1,13 +1,13 @@
 declared-services:
   visual-recognition:
     label: watson_vision_combined
-    plan: free
+    plan: lite
   cloudant-images:
     label: cloudantNoSQLDB
     plan: Lite
 applications:
 - path: .
-  memory: 1024M
+  memory: 256M
   instances: 1
   domain: mybluemix.net
   name: industrial-visual-analysis
@@ -15,4 +15,4 @@ applications:
   disk_quota: 1024M
   services:
   - visual-recognition
-  - cloudant-images
+  - cloudant-images 
