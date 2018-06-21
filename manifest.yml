@@ -1,7 +1,7 @@
 declared-services:
   visual-recognition:
     label: watson_vision_combined
-    plan: free
+    plan: lite
   cloudant-images:
     label: cloudantNoSQLDB
     plan: Lite
