@@ -12,7 +12,8 @@ applications:
   domain: mybluemix.net
   name: industrial-visual-analysis
   host: industrial-visual-analysis
+  random-route: true
   disk_quota: 1024M
   services:
   - visual-recognition
-  - cloudant-images 
+  - cloudant-images
