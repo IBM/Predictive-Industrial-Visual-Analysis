@@ -1,7 +1,9 @@
 **__스킬 레벨__**: 초급
 <br>**__주의__**: 이 레파지토리에서 사용되는 모든 서비스는 Lite 플랜(무료)입니다.
 
-# [산업 설비의 시각적 분석](https://developer.ibm.com/code/patterns/industrial-visual-analysis/)
+# [산업 설비의 Visual Recognition 분석](https://developer.ibm.com/code/patterns/industrial-visual-analysis/)
+
+*다른 언어로 보기: [English](README.md)*
 
 이 코드 패턴에서는 머신러닝 분류 기술을 사용하여 산업용 장비의 시각적 이미지 검사를 통해 다양한 파손을 검사합니다. Watson Visual Recognition을 사용한 숙련된 분류기로 이미지를 분석하여 정상, 파열, 부식, 손상된 코팅, 공동 실패 및 누출의 6가지 식별자로 오일 및 가스 파이프라인을 검사합니다. 손상 식별자 또는 정상 식별자와 각 이미지의 일치하는 정도를 백분율로 보게됩니다. 이 데이터는 대시보드에서 즉각적인 주의가 필요한 파이프라인이나 정상 파이프라인을 나타내는 데 사용됩니다.
 
