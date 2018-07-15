@@ -5,7 +5,7 @@
 
 *다른 언어로 보기: [English](README.md)*
 
-이 코드 패턴에서는 머신러닝 분류 기술을 사용하여 산업용 장비의 시각적 이미지 검사를 통해 다양한 파손을 검사합니다. Watson Visual Recognition을 사용한 숙련된 분류기로 이미지를 분석하여 정상, 파열, 부식, 손상된 코팅, 공동 실패 및 누출의 6가지 식별자로 오일 및 가스 파이프라인을 검사합니다. 손상 식별자 또는 정상 식별자와 각 이미지의 일치하는 정도를 백분율로 보게됩니다. 이 데이터는 대시보드에서 즉각적인 주의가 필요한 파이프라인이나 정상 파이프라인을 나타내는 데 사용됩니다.
+이 코드 패턴에서는 머신러닝 분류 기술을 사용하여 산업용 장비의 시각적 이미지 검사를 통해 다양한 파손을 검사합니다. Watson Visual Recognition을 사용한 숙련된 분류기(classifier)로 이미지를 분석하여 정상, 파열, 부식, 손상된 코팅, 공동 실패 및 누출의 6가지 식별자(identifiers)로 오일 및 가스 파이프라인을 검사합니다. 손상 식별자 또는 정상 식별자와 각 이미지의 일치하는 정도를 백분율로 보게됩니다. 이 데이터는 대시보드에서 즉각적인 주의가 필요한 파이프라인이나 정상 파이프라인을 나타내는 데 사용됩니다.
 
 이미지 데이터는 Cloudant 데이터베이스에 저장되는데 이는 원격 디바이스(드론을 포함한)에 연결되어 이미지 캡처를 더욱 간단하게 합니다. 이 데이터베이스는 위치, 설명과 같은 이미지의 다른 속성들도 저장할 수 있습니다. 이 코드 패턴은 IBM Cloud Functions가 마이크로서비스를 트리거하여 이미지의 형태로 Cloudant 데이터베이스에 추가하는 방법을 보여줍니다. 마이크로서비스는 Visual Recognition 분석을 수행하고 분석된 데이터를 Cloudant 데이터베이스에 업데이트합니다. 
 
@@ -75,7 +75,7 @@ curl -X POST -u "apikey:{INSERT-YOUR-IAM-APIKEY-HERE}" -F "Bursted_Pipe_positive
 curl -X GET -u "apikey:{INSERT-YOUR-IAM-APIKEY-HERE}"  "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2018-03-19"
 ```
 
-분류자를 사용하는 방법은 [여기를 참조하십시오](https://console.bluemix.net/docs/services/visual-recognition/tutorial-custom-classifier.html#creating-a-custom-classifier)
+분류자(classifier)를 사용하는 방법은 [여기를 참조하십시오](https://console.bluemix.net/docs/services/visual-recognition/tutorial-custom-classifier.html#creating-a-custom-classifier)
 
 ## 2. Cloudant NoSQL DB 설정하기
 
