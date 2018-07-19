@@ -125,9 +125,6 @@ install
 "--uninstall" )
 uninstall
 ;;
-"--update" )
-update
-;;
 "--reinstall" )
 uninstall
 install
