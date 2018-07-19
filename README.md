@@ -175,9 +175,7 @@ The above command will setup the OpenWhisk actions for you, there should be no n
 
 #### Explore IBM Cloud Functions
 
-In IBM Cloud, look for ``Functions`` in ``Catalog``
-
-There you will see a UI to ``Manage`` and ``Monitor`` the service. In addition, it has information for ``Getting Started`` and even ``Develop`` actions.
+In IBM Cloud, look for ``Functions`` in ``Catalog``. There you will see a UI to configure the service including ``Actions``, ``Triggers`` and ``Monitor`` the service.
 
 <p align="center">
   <img width="800"  src="readme_images\cloud_functions_scrnshot.png">
