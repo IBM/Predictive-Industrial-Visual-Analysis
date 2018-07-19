@@ -279,12 +279,6 @@ The ``setup_functions.sh`` have different commands to uninstall, re-install or u
 ./setup_functions.sh --env
 ```
 
-* Update:
-```
-./setup_functions.sh --update
-```
-
-
 #### IBM Cloud application
 To troubleshoot your IBM Cloud application, use the logs. To see the logs, run:
 
