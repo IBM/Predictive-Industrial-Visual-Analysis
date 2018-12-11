@@ -279,6 +279,26 @@ The ``setup_functions.sh`` have different commands to uninstall, re-install or u
 ./setup_functions.sh --env
 ```
 
+<b>Trigger Error<b>
+
+If your images are not being analyzed, open the   `Monitor` window in your IBM Cloud Functions. If you receive an error `At least one of filter or query_params parameters must be supplied`:
+
+<p align="center">
+  <img width="400"  src="readme_images\trigger-error.png">
+</p>
+
+You can manually add the parameter by going to the `Trigger` option on the left side menu and opening the `image_db-cloudant-update-trigger`:
+<p align="center">
+  <img width="600"  src="readme_images\trigger.png">
+</p>
+
+Here click on the `Parameters` option on the left side menu and manually add the parameters with Parameter Name: `dbname`, and Parameter Value: `"image_db"`
+<p align="center">
+  <img width="600"  src="readme_images\trigger-param.png">
+</p>
+
+Try running the application again.
+
 #### IBM Cloud application
 To troubleshoot your IBM Cloud application, use the logs. To see the logs, run:
 
@@ -294,8 +314,7 @@ bx app logs <application-name> --recent
 <li><strong>With Watson</strong>: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? <a href="https://www.ibm.com/watson/with-watson/" rel="nofollow">Join the With Watson program</a> to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.</li>
 <li><strong>Watson Studios</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Watson Studios</a></li>
 <li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/ms-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
-
-
+</ul>
 
 # License
 
