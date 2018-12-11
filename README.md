@@ -279,7 +279,7 @@ The ``setup_functions.sh`` have different commands to uninstall, re-install or u
 ./setup_functions.sh --env
 ```
 
-<b>Trigger Error<b>
+<b>Trigger Error</b>
 
 If your images are not being analyzed, open the   `Monitor` window in your IBM Cloud Functions. If you receive an error `At least one of filter or query_params parameters must be supplied`:
 
