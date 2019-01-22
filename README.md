@@ -3,7 +3,7 @@
 
 *Read this in other launguages: [한국어](README-ko.md)*
 
-# [Industrial Visual Analysis](https://developer.ibm.com/code/patterns/industrial-visual-analysis/)
+# [Industrial Visual Analysis](https://developer.ibm.com/patterns/analyze-industrial-equipment-defects/)
 
 In this code pattern, we will identify industrial equipment for various damages upon visual inspection by using machine learning classification techniques.  Using Watson Visual Recognition, we will analyze the image against a trained classifier to inspect oil and gas pipelines with six identifiers - Normal, Burst, Corrosion, Damaged Coating, Joint Failure and Leak. For each image we will provide a percent match with each of the category, on how closely the image matches one of the damaged identifiers or the Normal identifier.  This data can then be used to create a dashboard to the pipelines needing immediate attention to no attention.
 
@@ -32,8 +32,8 @@ When the reader has completed this code pattern, they will understand how to:
 
 ## Included Components
 + [Visual Recognition](https://www.ibm.com/watson/services/visual-recognition/)
-+ [Cloudant](https://www.ibm.com/analytics/us/en/technology/cloud-data-services/cloudant/)
-+ [IBM Cloud Functions](https://console.bluemix.net/openwhisk)
++ [Cloudant](https://www.ibm.com/analytics/)
++ [IBM Cloud Functions](https://cloud.ibm.com/openwhisk)
 
 
 ## Featured technologies
@@ -76,11 +76,11 @@ The response from above will provide you with a status on the submission and wil
 curl -X GET -u "apikey:{INSERT-YOUR-IAM-APIKEY-HERE}"  "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2018-03-19"
 ```
 
-You can find more information on working with your classifier [here](https://console.bluemix.net/docs/services/visual-recognition/tutorial-custom-classifier.html#creating-a-custom-classifier)
+You can find more information on working with your classifier [here](https://cloud.ibm.com/docs/services/visual-recognition/tutorial-custom-classifier.html#creating-a-custom-classifier)
 
 ## 2. Cloudant NoSQL DB Setup
 
-Create the [Cloudant NoSQL](https://www.ibm.com/analytics/us/en/technology/cloud-data-services/cloudant/) service in IBM Cloud.
+Create the [Cloudant NoSQL](https://www.ibm.com/analytics/) service in IBM Cloud.
 
 Create a new database in Cloudant called <strong>image_db</strong>
 
@@ -107,7 +107,7 @@ if ( doc.type == 'image_db.image' ) {
 
 We will now set up the IBM Cloud Functions (OpenWhisk) using Bluemix CLI.
 
-#### [Setup and download the Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/download_cli.html#download_install)
+#### [Setup and download the Bluemix CLI](https://cloud.ibm.com/docs/cli/reference/bluemix_cli/download_cli.html#download_install)
 
 * Install the Cloud Functions Plugin
 ```
@@ -204,7 +204,7 @@ Test your application by going to: [http://localhost:3000/](http://localhost:300
 
 #### Deploy to IBM Cloud
 
-[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/Predictive-Industrial-Visual-Analysis)
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/IBM/Predictive-Industrial-Visual-Analysis)
 
 
 You can push the app to IBM Cloud by first editing the ```manifest file``` file and then using cloud foundry cli commands.
@@ -253,7 +253,7 @@ The app has the following functions:
 
 ## Extending the pattern with Drone
 
-This code pattern can be extended by adding a Drone to take images. A [DJI drone](http://developer.dji.com/) can be used to capture images and configured to send images to our Cloudant database.  As the image is received by the Cloudant database, the VR analysis and image detail can be displayed through the web UI.
+This code pattern can be extended by adding a Drone to take images. A [DJI drone](https://developer.dji.com/) can be used to capture images and configured to send images to our Cloudant database.  As the image is received by the Cloudant database, the VR analysis and image detail can be displayed through the web UI.
 
 ## Troubleshooting
 
@@ -308,16 +308,16 @@ bx app logs <application-name> --recent
 
 ## <h2>Learn more</h2>
 <ul>
-<li><strong>Artificial Intelligence Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/artificial-intelligence/" rel="nofollow">AI Code Patterns</a>.</li>
-<li><strong>Data Analytics Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/data-science/" rel="nofollow">Data Analytics Code Patterns</a></li>
+<li><strong>Artificial Intelligence Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/technologies/artificial-intelligence/" rel="nofollow">AI Code Patterns</a>.</li>
+<li><strong>Data Analytics Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/technologies/data-science/" rel="nofollow">Data Analytics Code Patterns</a></li>
 <li><strong>AI and Data Code Pattern Playlist</strong>: Bookmark our <a href="https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde" rel="nofollow">playlist</a> with all of our Code Pattern videos</li>
 <li><strong>With Watson</strong>: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? <a href="https://www.ibm.com/watson/with-watson/" rel="nofollow">Join the With Watson program</a> to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.</li>
-<li><strong>Watson Studios</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Watson Studios</a></li>
-<li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/ms-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
+<li><strong>Watson Studios</strong>: Master the art of data science with IBM's <a href="https://www.ibm.com/cloud/watson-studio" rel="nofollow">Watson Studios</a></li>
+<li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/us-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
 </ul>
 
 # License
 
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](http://www.apache.org/licenses/LICENSE-2.0.txt).
+This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-[Apache Software License (ASL) FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
+[Apache Software License (ASL) FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
