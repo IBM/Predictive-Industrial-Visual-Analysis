@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/IBM/Predictive-Industrial-Visual-Analysis.svg?branch=master)](https://travis-ci.com/IBM/Predictive-Industrial-Visual-Analysis)
+
 **__Skill Level__**: Beginner
 <br>**__N.B__**: All services used in this repo are Lite plans.
 
