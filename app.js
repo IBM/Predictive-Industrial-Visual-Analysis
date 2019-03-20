@@ -30,32 +30,40 @@ var multipartMiddleware = multipart();
 var vcapServices = require('vcap_services');
 // Cloudant Credentials
 var cloudantCredentials = vcapServices.getCredentials('cloudantNoSQLDB');
-var cloudant_username = cloudantCredentials.username || process.env.CLOUDANT_USERNAME;
-var cloudant_pwd = cloudantCredentials.password || process.env.CLOUDANT_PASSWORD;
-var cloudant_host = cloudantCredentials.host || process.env.CLOUDANT_HOST;
-var cloudant_url = cloudantCredentials.url || process.env.CLOUDANT_URL;
+
+if (cloudantCredentials.username || process.env.CLOUDANT_USERNAME) {
+  var cloudant_username = cloudantCredentials.username || process.env.CLOUDANT_USERNAME;
+  var cloudant_pwd = cloudantCredentials.password || process.env.CLOUDANT_PASSWORD;
+  var cloudant_host = cloudantCredentials.host || process.env.CLOUDANT_HOST;
+  var cloudant_url = cloudantCredentials.url || process.env.CLOUDANT_URL;
+  console.log (cloudant_url);
+}
 
 //Visual Recognition Credentials
 var vrCredentials = vcapServices.getCredentials('watson_vision_combined');
-var vr_key = vrCredentials.api_key || process.env.VR_KEY;
-var vr_url = vrCredentials.url || process.env.VR_URL;
-var vr_classifiers = process.env.VR_CLASSIFIERS;
 
-console.log (cloudant_url);
-console.log (vr_key);
+if(vrCredentials.api_key || process.env.VR_KEY) {
+  var vr_key = vrCredentials.api_key || process.env.VR_KEY;
+  var vr_url = vrCredentials.url || process.env.VR_URL;
+  var vr_classifiers = process.env.VR_CLASSIFIERS;
+  console.log (vr_key);
+}
+
 
 // Initialize Cloudant DB
-var cloudant = Cloudant(cloudant_url);
-var db;
-var dbName = "image_db";
-var dbCredentials = {
-    dbName: 'image_db'
-};
+if (cloudant_url) {
+  var cloudant = Cloudant(cloudant_url);
+  var db;
+  var dbName = "image_db";
+  var dbCredentials = {
+      dbName: 'image_db'
+  };
 
-cloudant.db.create(dbName, function() {
-    // Specify the database we are going to use (alice)...
-    db = cloudant.db.use(dbName);
-});
+  cloudant.db.create(dbName, function() {
+      // Specify the database we are going to use (alice)...
+      db = cloudant.db.use(dbName);
+  });
+}
 
 // Web server
 var app = express();

@@ -67,13 +67,13 @@ cd Predictive-Industrial-Visual-Analysis/vr-image-data
 Here we will create a classifier using the zipped images to train the Watson Visual-Recognition service. The images in each zipped folder are used to make the Watson VR service become familiar with the images that relate to the different categories (Corrosion, Leak, etc.). Run the following command to submit all 6 sets of images to the Watson service classifier:
 
 ```
-curl -X POST -u "apikey:{INSERT-YOUR-IAM-APIKEY-HERE}" -F "Bursted_Pipe_positive_examples=@Burst_Images.zip" -F "Corroded_Pipe_positive_examples=@Corrosion_Images.zip" -F "Damaged_Coating_positive_examples=@Damaged_Coating_Images.zip" -F "Joint_Failure_positive_examples=@Joint_Failure_Images.zip" -F "Pipe_Leak_positive_examples=@Leak_Images.zip" -F "Normal_Condition_positive_examples=@Normal_Condition.zip" -F "name=OilPipeCondition" "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers?version=2018-03-19"
+curl -X POST -u "apikey:{INSERT-YOUR-APIKEY-HERE}" -F "Bursted_Pipe_positive_examples=@Burst_Images.zip" -F "Corroded_Pipe_positive_examples=@Corrosion_Images.zip" -F "Damaged_Coating_positive_examples=@Damaged_Coating_Images.zip" -F "Joint_Failure_positive_examples=@Joint_Failure_Images.zip" -F "Pipe_Leak_positive_examples=@Leak_Images.zip" -F "Normal_Condition_positive_examples=@Normal_Condition.zip" -F "name=OilPipeCondition" "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers?version=2018-03-19"
 ```
 
 The response from above will provide you with a status on the submission and will give you a `CLASSIFIER_ID`. Please copy this for future use as well. After executing the above command, you can view the status of your Watson service and whether it has finished training on the images you submitted. You can check the status like this:
 
 ```
-curl -X GET -u "apikey:{INSERT-YOUR-IAM-APIKEY-HERE}"  "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2018-03-19"
+curl -X GET -u "apikey:{INSERT-YOUR-APIKEY-HERE}"  "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers/{INSERT-CLASSIFIER-ID-HERE}?api_key={INSERT-API-KEY-HERE}&version=2018-03-19"
 ```
 
 You can find more information on working with your classifier [here](https://cloud.ibm.com/docs/services/visual-recognition/tutorial-custom-classifier.html#creating-a-custom-classifier)
@@ -181,6 +181,7 @@ In IBM Cloud, look for ``Functions`` in ``Catalog``. There you will see a UI to 
   <img width="800"  src="readme_images\cloud_functions_scrnshot.png">
 </p>
 
+If you encounter an error in your ``Monitor`` tab, check this [section on Trigger Error](#trigger-error) to resolve.
 
 ## 4. Run Web Application
 
@@ -279,7 +280,7 @@ The ``setup_functions.sh`` have different commands to uninstall, re-install or u
 ./setup_functions.sh --env
 ```
 
-<b>Trigger Error</b>
+#### Trigger Error
 
 If your images are not being analyzed, open the   `Monitor` window in your IBM Cloud Functions. If you receive an error `At least one of filter or query_params parameters must be supplied`:
 

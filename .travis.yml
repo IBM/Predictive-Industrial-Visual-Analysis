@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "8"
+before_script:
+  - npm install
+script:
+- npm start & sleep 5; if curl http://localhost:3000; then echo “Test passed”; exit 0; else echo “Test failed”; exit 1; fi
