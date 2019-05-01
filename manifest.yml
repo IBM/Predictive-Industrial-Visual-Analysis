@@ -1,8 +1,8 @@
 declared-services:
-  visual-recognition:
+  piva-visual-recognition:
     label: watson_vision_combined
     plan: lite
-  cloudant-images:
+  piva-cloudant-images:
     label: cloudantNoSQLDB
     plan: Lite
 applications:
@@ -14,5 +14,5 @@ applications:
   random-route: true
   disk_quota: 1024M
   services:
-  - visual-recognition
-  - cloudant-images
+  - piva-visual-recognition
+  - piva-cloudant-images
