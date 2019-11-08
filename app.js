@@ -554,7 +554,7 @@ db.get(request.query.id, function(err, existingdoc) {
                 } else {
 
                     existingdoc = doc;
-                    console.log("New doc created ..");
+                    console.log("New doc created 1 ..");
                     console.log(existingdoc);
                     insertAttachment(file, existingdoc.id, existingdoc.rev, name, value, response);
 

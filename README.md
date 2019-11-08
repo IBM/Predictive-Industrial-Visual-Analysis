@@ -94,6 +94,19 @@ Create a new database in Cloudant called <strong>image_db</strong>
   <img width="600"  src="readme_images\cloudant_db.png">
 </p>
 
+Next you need to go to create a view of the database.  Click on ``Launch Cloudant Dashboard`` button.
+
+<p align="center">
+  <img width="600"  src="readme_images\launch_Dashboard.png">
+</p>
+
+Next, select the data base you just created ``image_db``.  Then select the `+` next to  `Design Documents` and click on `New View`.
+
+
+<p align="center">
+  <img width="600"  src="readme_images\design-doc.png">
+</p>
+
 
 Next, create a view on the database with the design name ``image_db_images``, index name ``image_db.images``, and use the following map function:
 ```
@@ -113,16 +126,17 @@ if ( doc.type == 'image_db.image' ) {
 
 We will now set up the IBM Cloud Functions (OpenWhisk) using Bluemix CLI.
 
-#### [Setup and download the Bluemix CLI](https://cloud.ibm.com/docs/cli/reference/bluemix_cli/download_cli.html#download_install)
+#### [Setup and download the ibmcloud CLI](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-cli_install)
 
 * Install the Cloud Functions Plugin
+
 ```
-bx plugin install Cloud-Functions -r Bluemix
+ibmcloud plugin install Cloud-Functions -r Bluemix
 ```
 
 * Log in to IBM Cloud, and target a Region (i.e api.ng.bluemix.net), Organization (i.e Raheel.Zubairy) and Space (i.e dev).
 ```
-bx login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
+ibmcloud login -a {INSERT REGION} -o {INSERT ORGANIZATION} -s {INSERT SPACE}
 ```
 
 #### API Authentication and Host
@@ -131,12 +145,12 @@ We will need the API authentication key and host.
 
 * Command to retrieve API host:
 ```
-bx wsk property get --apihost
+ibmcloud wsk property get --apihost
 ```
 
 * Command to retrieve API authentication key:
 ```
-bx wsk property get --auth
+ibmcloud wsk property get --auth
 ```
 
 __N.B:__ make sure what plan (Lite, etc.) you are associating when creating this service.

@@ -56,6 +56,7 @@ function install() {
     --param host $CLOUDANT_HOST
 
   echo "Creating trigger"
+  echo ": $CLOUDANT_DB"
   ibmcloud fn trigger create image_db-cloudant-update-trigger --feed image_db-cloudant/changes --param dbname $CLOUDANT_DB
 
   echo "Creating actions"
@@ -76,8 +77,9 @@ function install() {
 #ibmcloud fn rule create image_db-rule image_db-cloudant-update-trigger image_db-cloudant-changelistener
   ibmcloud fn rule create image_db-rule image_db-cloudant-update-trigger image_db/analysis
 
-  echo "Set Cloudant Param on Trigger"
-  ibmcloud fn trigger update image_db-cloudant-update-trigger --param dbname $CLOUDANT_DB
+  #echo "Set Cloudant Param on Trigger"
+  #echo -e $CLOUDANT_DB
+  #ibmcloud fn trigger update image_db-cloudant-update-trigger --param dbname $CLOUDANT_DB
 
   echo -e "${GREEN}Install Complete${NC}"
   ibmcloud fn list

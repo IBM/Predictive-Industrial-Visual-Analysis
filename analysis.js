@@ -53,17 +53,21 @@ function main(args) {
         //console.log("[", cloudantDocument.args.id, "] Ignored, it was deleted");
         return {status : "Ignoring cloudant change feed since it was for document deletion"};
     } else if (newdocpattern.test(cloudantDocument.args.changes[0].rev)){
-        console.log("New cloudant doc detected!");
-        var cloudant = require("cloudant")(cloudantDocument.args.cloudantUrl);
+        console.log("New  cloudant doc detected!");
+        
+        var cloudant = require('@cloudant/cloudant')(cloudantDocument.args.cloudantUrl);
         var db = cloudant.db.use(cloudantDocument.args.cloudantDbName);
+
         var fileName;
         var thumbFileName;
+
 
         //get document from cloudant
         var p0 = function(cloudantDocument) {
             console.log("Getting doc from Cloudant");
             var promise = new Promise(function(resolve, reject) {
-                                      db.get(cloudantDocument.args.id, null, function(error, response) {
+                                    db.get(cloudantDocument.args.id, null, function(error, response) {
+                                        
                                              if (!error) {
                                              console.log("Get DOC from cloudant successful " + JSON.stringify(response));
 
@@ -91,7 +95,7 @@ function main(args) {
 
                                              } else {
                                              console.log("Error getting document");
-                                             console.log(err);
+                                             console.log(error);
                                              reject(err);
                                              }
                                              });
@@ -134,14 +138,14 @@ function main(args) {
             console.log("After enriching data with Weather: " + JSON.stringify(cloudantDocument));
             fileName = cloudantDocument._id + "-image.jpg";
             var promise = new Promise(function(resolve, reject) {
-                                      db.attachment.get(cloudantDocument._id, "image.jpg").pipe(fs.createWriteStream(fileName))
+                                      db.attachment.getAsStream(cloudantDocument._id, "image.jpg").pipe(fs.createWriteStream(fileName))
                                       .on("finish", function () {
                                           console.log("Completed get of attachment");
                                           resolve(cloudantDocument);
                                           })
                                       .on("error", function (err) {
                                           console.log("Error on get of attachment");
-                                          reject(err);
+                                          reject(Error("attachment error"));
                                           });
                                       });
             return promise;
@@ -149,6 +153,7 @@ function main(args) {
 
         //Process Thumbnail
         var p3 = function(cloudantDocument) {
+           console.log("After attachment from Cloudant " + JSON.stringify(cloudantDocument));
             thumbFileName = cloudantDocument._id + "-thumbnail.jpg";
             var promise = new Promise(function(resolve, reject) {
                                       console.log("generating thumbnail");
@@ -229,7 +234,7 @@ function main(args) {
                                                                        console.log(err);
                                                                        reject(err);
                                                                        } else {
-                                                                       console.log("saved thumbnail");
+                                                                      console.log("saved thumbnail");
                                                                        //console.log("Body is: " + JSON.stringify(body));
                                                                        cloudantDocument._rev = body.rev;
                                                                        console.log("Doc: " + JSON.stringify(cloudantDocument));
